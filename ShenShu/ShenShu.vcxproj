@@ -112,9 +112,8 @@
     <ClCompile Include="cef_widget_win.cc" />
     <ClCompile Include="cef_win.cc" />
     <ClCompile Include="main_window.cc" />
-    <QtRcc Include="ShenShu.qrc" />
-    <QtUic Include="ShenShu.ui" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="qcef\qcef_app.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="main_window.h" />
@@ -125,6 +124,10 @@
   <ItemGroup>
     <ClInclude Include="cef.h" />
     <ClInclude Include="cef_handler.h" />
+    <ClInclude Include="qcef\qcef_app.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,3 +1,6 @@
+/**
+ * @brief CEFHandler的实现, 终极Boss
+ */
 #ifndef QT_CEF_POC_HANDLER_H_
 #define QT_CEF_POC_HANDLER_H_
 
@@ -9,9 +12,7 @@ class CefHandler :
     public CefDisplayHandler,
     public CefFocusHandler {
  public:
-  explicit CefHandler(QPointer<QMainWindow> main_win,
-                      QPointer<QLineEdit> url_line_edit,
-                      QPointer<QWidget> browser_widg);
+	 explicit CefHandler();
 
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override {
     return this;
@@ -29,11 +30,6 @@ class CefHandler :
                                const CefString& url) override;
 
   virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) override;
-
- private:
-  QPointer<QMainWindow> main_win_;
-  QPointer<QLineEdit> url_line_edit_;
-  QPointer<QWidget> browser_widg_;
 
   IMPLEMENT_REFCOUNTING(CefHandler);
 };
