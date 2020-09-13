@@ -13,9 +13,10 @@
 #define QCEF_QCEF_APP_H_
 
 #include "include/cef_app.h"
+#include "cef_handler.h"
 
 /**
- * @brief 全局浏览器管理器
+ * @brief 全局浏览器管理器, 多个browser，有助于实现tab的功能
  */
 class QcefApp:
 	public CefApp,
@@ -38,7 +39,16 @@ public:
 	 * @brief 重载获取进程级别重载的类型
 	 */
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler();
-
+	/**
+	 * @brief 创建一个新的brower
+	 * @return 新建的一个brower
+	 */
+	CefRefPtr<CefHandler> CreateBrowser();
+private:
+	//! 不同浏览页面
+	std::vector<CefRefPtr<CefHandler>> m_clients;
+	//! 定义引用
+	IMPLEMENT_REFCOUNTING(QcefApp);
 };
 
 #endif

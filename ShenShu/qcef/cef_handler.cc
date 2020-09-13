@@ -1,6 +1,8 @@
 #include "cef_handler.h"
 
-CefHandler::CefHandler() {}
+CefHandler::CefHandler(int32_t index):
+	m_index(index)
+{}
 
 void CefHandler::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString &title) 
 {

@@ -12,7 +12,7 @@ class CefHandler :
     public CefDisplayHandler,
     public CefFocusHandler {
  public:
-	 explicit CefHandler();
+	 explicit CefHandler(int32_t index);
 
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override {
     return this;
@@ -30,6 +30,14 @@ class CefHandler :
                                const CefString& url) override;
 
   virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) override;
+  /**
+   * @brief 获取这个handler的索引
+   * @param  获得的索引
+   */
+  int32_t Index();
+private:
+	//! 索引
+	int32_t m_index;
 
   IMPLEMENT_REFCOUNTING(CefHandler);
 };
