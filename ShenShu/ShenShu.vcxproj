@@ -107,7 +107,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cef.cc" />
-    <ClCompile Include="cef_handler.cc" />
+    <ClCompile Include="qcef\cef_handler.cc" />
     <ClCompile Include="cef_widget.cc" />
     <ClCompile Include="cef_widget_win.cc" />
     <ClCompile Include="cef_win.cc" />
@@ -123,7 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cef.h" />
-    <ClInclude Include="cef_handler.h" />
+    <ClInclude Include="qcef\cef_handler.h" />
     <ClInclude Include="qcef\qcef_app.h" />
   </ItemGroup>
   <ItemGroup>

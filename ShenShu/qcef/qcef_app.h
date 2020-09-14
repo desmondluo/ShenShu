@@ -32,6 +32,10 @@ public:
 	 */
 	virtual ~QcefApp();
 	/**
+	 * @brirf 全局单例, 任何地方可以获取这个app, 所以这个里面要保证自己的绝对线程安全
+	 */
+	static CefRefPtr<QcefApp> Instance();
+	/**
 	 * @brief 当初始化完毕的回调
 	 */
 	virtual void OnContextInitialized();
@@ -41,12 +45,19 @@ public:
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler();
 	/**
 	 * @brief 创建一个新的brower
+	 * @param winhandler 托管的一个windows ui hwd
 	 * @return 新建的一个brower
 	 */
-	CefRefPtr<CefHandler> CreateBrowser();
+	CefRefPtr<CefHandler> CreateBrowser(CefWindowHandle winhandler);
+	/**
+	 * @brief 开始CEF的消息循环
+	 */
+	virtual void Run();
 private:
 	//! 不同浏览页面
 	std::vector<CefRefPtr<CefHandler>> m_clients;
+	//! 自身
+	static CefRefPtr<QcefApp> m_app;
 	//! 定义引用
 	IMPLEMENT_REFCOUNTING(QcefApp);
 };

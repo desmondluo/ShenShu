@@ -13,6 +13,16 @@ class CefHandler :
     public CefFocusHandler {
  public:
 	 explicit CefHandler(int32_t index);
+	 /**
+	  * @brief 外挂一个browser
+	  * @param browser 外挂的浏览器
+	  */
+	 void SetBrower(CefRefPtr<CefBrowser> browser);
+	 /**
+	  * @brief 获取这个handler对应的browser
+	  * @return 对应的browser
+	  */
+	 CefRefPtr<CefBrowser> GetBrowser();
 
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override {
     return this;
@@ -38,6 +48,8 @@ class CefHandler :
 private:
 	//! 索引
 	int32_t m_index;
+	//! CEF的事例
+	CefRefPtr<CefBrowser> m_browser;
 
   IMPLEMENT_REFCOUNTING(CefHandler);
 };

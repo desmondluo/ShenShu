@@ -1,7 +1,9 @@
 #include "main_window.h"
+#include "qcef/qcef_app.h"
 
-MainWindow::MainWindow(Cef *cef, QWidget *parent)
-    : QMainWindow(parent), cef_(cef) {
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent) 
+ {
   // TODO: how to determine best interval
   // TODO: is the timer stopped for us?
   if (startTimer(10) == 0) {
@@ -13,7 +15,7 @@ MainWindow::MainWindow(Cef *cef, QWidget *parent)
   setFocusPolicy(Qt::FocusPolicy::StrongFocus);
   resize(1024, 768);
 
-  cef_widg_ = new CefWidget(cef);
+  cef_widg_ = new CefWidget(parent);
 
   url_line_edit_ = new QLineEdit;
   connect(url_line_edit_, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
@@ -39,7 +41,8 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::timerEvent(QTimerEvent*) {
-  cef_->Tick();
+	// 启动消息循环
+	QcefApp::Instance()->Run();
 }
 
 void MainWindow::UrlEntered() {
