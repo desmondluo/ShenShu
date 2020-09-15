@@ -48,14 +48,14 @@ public:
 	 * @param winhandler 托管的一个windows ui hwd
 	 * @return 新建的一个brower
 	 */
-	CefRefPtr<CefHandler> CreateBrowser(CefWindowHandle winhandler);
+	CefRefPtr<QcefHandler> CreateBrowser(CefWindowHandle winhandler);
 	/**
 	 * @brief 开始CEF的消息循环
 	 */
 	virtual void Run();
 private:
 	//! 不同浏览页面
-	std::vector<CefRefPtr<CefHandler>> m_clients;
+	std::vector<CefRefPtr<QcefHandler>> m_clients;
 	//! 自身
 	static CefRefPtr<QcefApp> m_app;
 	//! 定义引用

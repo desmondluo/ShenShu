@@ -56,10 +56,10 @@ CefRefPtr<CefBrowserProcessHandler> QcefApp::GetBrowserProcessHandler()
 	return this;
 }
 
-CefRefPtr<CefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
+CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 {
 	//! 创建一个handler， 并且管理起来
-	CefRefPtr<CefHandler> handler = new CefHandler(m_clients.size());
+	CefRefPtr<QcefHandler> handler = new QcefHandler(m_clients.size());
 	m_clients.resize(m_clients.size() + 1);
 	m_clients[m_clients.size() - 1] = handler;
 	//! 创建浏览器

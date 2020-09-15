@@ -4,7 +4,6 @@
 #include <QtWidgets>
 #include "include/cef_app.h"
 #include "include/cef_browser.h"
-#include "cef.h"
 #include "qcef/cef_handler.h"
 
 class CefWidget : public QWidget {
@@ -25,7 +24,7 @@ class CefWidget : public QWidget {
   void resizeEvent(QResizeEvent *event);
 
  private:
-  CefRefPtr<CefHandler> m_handler;
+  CefRefPtr<QcefHandler> m_handler;
 };
 
 #endif // QT_CEF_POC_CEFWIDGET_H_

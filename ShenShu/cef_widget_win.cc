@@ -11,7 +11,7 @@ QPointer<QWidget> CefWidget::EmbedBrowser(QMainWindow *main_win,
     win_info.SetAsChild((CefWindowHandle) winId(),
                       RECT { 0, 0, width(), height() });
 	CefBrowserSettings settings;
-    CefRefPtr<CefHandler> handler(new CefHandler(0));
+    CefRefPtr<QcefHandler> handler(new QcefHandler(0));
     browser_ = CefBrowserHost::CreateBrowserSync(win_info,
                                                handler,
                                                CefString("http://baidu.com"),

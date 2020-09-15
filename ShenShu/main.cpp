@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "main_window.h"
-#include "cef.h"
 #include "qcef/qcef_app.h"
 
 int main(int argc, char *argv[]) {

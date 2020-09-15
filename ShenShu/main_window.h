@@ -2,7 +2,6 @@
 #define QT_CEF_POC_MAINWINDOW_H_
 
 #include <QtWidgets>
-#include "cef.h"
 #include "cef_widget.h"
 
 class MainWindow : public QMainWindow {

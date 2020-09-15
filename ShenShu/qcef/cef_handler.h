@@ -7,12 +7,12 @@
 #include <QtWidgets>
 #include "include/cef_client.h"
 
-class CefHandler :
+class QcefHandler :
     public CefClient,
     public CefDisplayHandler,
     public CefFocusHandler {
  public:
-	 explicit CefHandler(int32_t index);
+	 explicit QcefHandler(int32_t index);
 	 /**
 	  * @brief 外挂一个browser
 	  * @param browser 外挂的浏览器
@@ -51,7 +51,7 @@ private:
 	//! CEF的事例
 	CefRefPtr<CefBrowser> m_browser;
 
-  IMPLEMENT_REFCOUNTING(CefHandler);
+  IMPLEMENT_REFCOUNTING(QcefHandler);
 };
 
 #endif // QT_CEF_POC_HANDLER_H_
