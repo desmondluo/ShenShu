@@ -26,10 +26,12 @@ QcefApp::QcefApp()
 
 QcefApp::~QcefApp()
 {
+	//CefBrowserHost::CloseBrowser(true);
 	// 挨个关闭
 	for (int32_t i = 0; i < (int32_t)m_clients.size(); ++i)
 	{
-		m_clients[i]->Release();
+		m_clients[i]->GetBrowser()->GetHost()->CloseBrowser(false);
+		//m_clients[i]->Release();
 	}
 	// 回收CEF的资源
 	CefShutdown();
@@ -74,6 +76,3 @@ void QcefApp::Run()
 {
 	CefDoMessageLoopWork();
 }
-
-
-
