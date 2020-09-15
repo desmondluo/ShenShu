@@ -2,49 +2,46 @@
 #include "qcef/qcef_app.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) 
+    :QMainWindow(parent) 
  {
-  // TODO: how to determine best interval
-  // TODO: is the timer stopped for us?
-  if (startTimer(10) == 0) {
-    throw std::runtime_error("Unable to start CEF timer");
-  }
+	//TODO: 用定时器启动CEF的UI消息循环, 当CEF被拆到其他线程的时候, 这个就要被删除
+	if(startTimer(10) == 0) 
+	{
+		throw std::runtime_error("Unable to start CEF timer");
+	}
 
-  // Common settings
-  setWindowTitle("QT CEF POC");
-  setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-  resize(1024, 768);
+	// Common settings
+	setWindowTitle("ShenShu");
+    setFocusPolicy(Qt::FocusPolicy::StrongFocus);
+	resize(1024, 768);
+	cef_widg_ = new CefWidget(parent);
 
-  cef_widg_ = new CefWidget(parent);
+    url_line_edit_ = new QLineEdit;
+    connect(url_line_edit_, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
 
-  url_line_edit_ = new QLineEdit;
-  connect(url_line_edit_, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
-
-  auto layout = new QGridLayout;
-  layout->addWidget(url_line_edit_, 0, 0);
-  layout->addWidget(cef_widg_, 1, 0);
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(0);
-  layout->setRowStretch(0, 0);
-  layout->setRowStretch(1, 1);
-  auto frame = new QFrame;
-  frame->setLayout(layout);
-  setCentralWidget(frame);
-
-  auto override_widg = cef_widg_->EmbedBrowser(this, url_line_edit_);
-  if (override_widg) {
-    layout->addWidget(override_widg, 1, 0);
-  }
+    auto layout = new QGridLayout;
+    layout->addWidget(url_line_edit_, 0, 0);
+    layout->addWidget(cef_widg_, 1, 0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->setRowStretch(0, 0);
+    layout->setRowStretch(1, 1);
+    auto frame = new QFrame;
+    frame->setLayout(layout);
+    setCentralWidget(frame);
 }
 
-MainWindow::~MainWindow() {
+MainWindow::~MainWindow() 
+{
 }
 
-void MainWindow::timerEvent(QTimerEvent*) {
+void MainWindow::timerEvent(QTimerEvent*) 
+{
 	// 启动消息循环
 	QcefApp::Instance()->Run();
 }
 
-void MainWindow::UrlEntered() {
-  cef_widg_->LoadUrl(url_line_edit_->text());
+void MainWindow::UrlEntered() 
+{
+    cef_widg_->LoadUrl(url_line_edit_->text());
 }

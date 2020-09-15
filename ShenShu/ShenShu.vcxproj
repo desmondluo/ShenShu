@@ -108,7 +108,6 @@
   <ItemGroup>
     <ClCompile Include="qcef\cef_handler.cc" />
     <ClCompile Include="cef_widget.cc" />
-    <ClCompile Include="cef_widget_win.cc" />
     <ClCompile Include="main_window.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qcef\qcef_app.cpp" />

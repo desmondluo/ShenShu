@@ -32,3 +32,16 @@ void CefWidget::resizeEvent(QResizeEvent *event)
 {
   this->UpdateSize();
 }
+
+void CefWidget::UpdateSize() {
+	// 基本的调整一下大小
+	if (m_handler)
+	{
+		auto browser_host = m_handler->GetBrowser()->GetHost();
+		auto browser_win = browser_host->GetWindowHandle();
+		SetWindowPos(browser_win, (HWND)this->winId(), 0, 0,
+			this->width(), this->height(),
+			SWP_NOZORDER);
+		browser_host->NotifyMoveOrResizeStarted();
+	}
+}

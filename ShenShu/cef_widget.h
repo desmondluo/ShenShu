@@ -1,3 +1,11 @@
+/**
+ * @file cef_widget.h
+ * @brief CEF的托管组件
+ * @auther desmond
+ * @date 2020-09-16
+ * @copyright desmond
+ * @version 1.0
+ */
 #ifndef QT_CEF_POC_CEFWIDGET_H_
 #define QT_CEF_POC_CEFWIDGET_H_
 
@@ -5,26 +13,45 @@
 #include "include/cef_app.h"
 #include "include/cef_browser.h"
 #include "qcef/cef_handler.h"
-
-class CefWidget : public QWidget {
+/**
+ * @brief CEF的UI托管组件
+ */
+class CefWidget: public QWidget {
   Q_OBJECT
  public:
-  CefWidget(QWidget *parent = 0);
-  ~CefWidget();
-
-  // If result is non-null, it needs to replace this widget
-  QPointer<QWidget> EmbedBrowser(QMainWindow *main_win,
-                                 QLineEdit *url_line_edit);
-  void LoadUrl(const QString &url);
-
-  void UpdateSize();
+	/**
+	 * @brief 构造函数
+	 * @param 父节点
+	 */
+	CefWidget(QWidget *parent = 0);
+	/**
+	 * @brief 析构函数
+	 */
+    ~CefWidget();
+	/**
+	 * @brief 当加载新的url的时候
+	 * @param url 新的url
+	 */
+    void LoadUrl(const QString &url);
+	/**
+	 * @brief 当大小发生改变的时候
+	 */
+    void UpdateSize();
 
  protected:
-  void moveEvent(QMoveEvent *event);
-  void resizeEvent(QResizeEvent *event);
-
- private:
-  CefRefPtr<QcefHandler> m_handler;
+	/**
+	 * @brief 当移动的时候
+	 * @param 移动事件
+	 */
+    void moveEvent(QMoveEvent *event);
+	/**
+	 * @brief 当大小发生改变的时候
+	 * @param 大小改变事件
+	 */
+    void resizeEvent(QResizeEvent *event);
+private:
+	//! 内部托管的cef浏览器
+    CefRefPtr<QcefHandler> m_handler;
 };
 
 #endif // QT_CEF_POC_CEFWIDGET_H_
