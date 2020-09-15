@@ -8,8 +8,8 @@
 ### 消息循环
 CEF本身是自带消息循环的, 如果集成其他消息循环的话, 就会导致原来消息循环失效的问题, 这种问题有两个解决方法
 
-1> 不使用CefRunMessageLoop, 单独使用CefDoMessageLoop, 这个会导致很多幺蛾子问题
-2> 使用multi_threaded_message_loop参数, 但是这个只对window有用
+1. 不使用CefRunMessageLoop, 单独使用CefDoMessageLoop, 这个会导致很多幺蛾子问题
+2. 使用multi_threaded_message_loop参数, 但是这个只对window有用
 
 因为这个项目是想做成跨平台的, 所以没有太大必要, 直接创建一个新的线程, 专门用来跑CEF, 那么CEF就可以只用自己的消息循环就好了, 可能交互会复杂一点， 但是也没事了
 
