@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
 void MainWindow::timerEvent(QTimerEvent*) 
 {
 	// 启动消息循环
-	QcefApp::Instance()->Run();
+	 QcefApp::Instance()->Run();
 }
 
 void MainWindow::UrlEntered() 

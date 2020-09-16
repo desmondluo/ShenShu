@@ -1,9 +1,14 @@
 #include <QApplication>
 #include "main_window.h"
 #include "qcef/qcef_app.h"
+#include "controller.h"
+
 
 int main(int argc, char *argv[]) {
+	Controller controller(argc, argv);
+	controller.ManagerLoop();
 	// 初始化一下自己
+	/*
 	QcefApp::Instance();
 	QApplication app(argc, argv);
 
@@ -13,4 +18,5 @@ int main(int argc, char *argv[]) {
 	win.raise();
 
 	return app.exec();
+	*/
 }

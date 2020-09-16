@@ -14,6 +14,7 @@ QcefApp::QcefApp()
 	{
 		// 如果失败的话, 可能是sanbox的问题
 		CefSettings settings;
+        settings.multi_threaded_message_loop = true;
 		settings.no_sandbox = true;
 		if (!CefInitialize(main_args, settings, nullptr, nullptr))
 		{
@@ -33,6 +34,7 @@ QcefApp::~QcefApp()
 		m_clients[i]->GetBrowser()->GetHost()->CloseBrowser(false);
 		//m_clients[i]->Release();
 	}
+    //CefQuitMessageLoop();
 	// 回收CEF的资源
 	CefShutdown();
 }
@@ -56,6 +58,12 @@ CefRefPtr<CefBrowserProcessHandler> QcefApp::GetBrowserProcessHandler()
 	return this;
 }
 
+void QcefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefDictionaryValue> extra_info)
+{
+    int32_t a = 0;
+}
+
 CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 {
 	//! 创建一个handler， 并且管理起来
@@ -65,6 +73,7 @@ CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 	//! 创建浏览器
 	CefWindowInfo wininfo;
 	CefBrowserSettings settings;
+    //settings.multi_threaded_message_loop = true;
 	// 第一次并不知道在哪的, 但是这个不重要, 后面一旦外部的UI初始化完毕, 就会主动通知这个UI, 做对应的调整
 	wininfo.SetAsChild(winhandler, RECT{ 0, 0, 0, 0 });
 	CefRefPtr<CefBrowser> browser = CefBrowserHost::CreateBrowserSync(wininfo, handler, CefString("http://baidu.com"), settings, nullptr, nullptr);
@@ -74,5 +83,11 @@ CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 
 void QcefApp::Run()
 {
-	CefDoMessageLoopWork();
+    CefDoMessageLoopWork();
+   // CefRunMessageLoop();
+}
+
+void QcefApp::Stop()
+{
+    CefQuitMessageLoop();
 }

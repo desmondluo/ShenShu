@@ -35,7 +35,7 @@ void CefWidget::resizeEvent(QResizeEvent *event)
 
 void CefWidget::UpdateSize() {
 	// 基本的调整一下大小
-	if (m_handler)
+	if (m_handler && m_handler->GetBrowser())
 	{
 		auto browser_host = m_handler->GetBrowser()->GetHost();
 		auto browser_win = browser_host->GetWindowHandle();
