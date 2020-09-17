@@ -20,8 +20,7 @@
  */
 class QcefApp:
 	public CefApp,
-	public CefBrowserProcessHandler,
-    public CefRenderProcessHandler
+	public CefBrowserProcessHandler
 {
 public:
 	/**
@@ -44,8 +43,6 @@ public:
 	 * @brief 重载获取进程级别重载的类型
 	 */
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler();
-    virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser,
-        CefRefPtr<CefDictionaryValue> extra_info);
 	/**
 	 * @brief 创建一个新的brower
 	 * @param winhandler 托管的一个windows ui hwd
@@ -56,10 +53,6 @@ public:
 	 * @brief 开始CEF的消息循环
 	 */
 	virtual void Run();
-    /**
-     * @brief 退出消息循环
-     */
-    virtual void Stop();
 private:
 	//! 不同浏览页面
 	std::vector<CefRefPtr<QcefHandler>> m_clients;

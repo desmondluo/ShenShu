@@ -106,8 +106,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cef_thread.cpp" />
-    <ClCompile Include="controller.cpp" />
     <ClCompile Include="qcef\cef_handler.cc" />
     <ClCompile Include="cef_widget.cc" />
     <ClCompile Include="main_window.cc" />
@@ -121,8 +119,6 @@
     <QtMoc Include="cef_widget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="controller.h" />
-    <QtMoc Include="cef_thread.h" />
     <ClInclude Include="qcef\cef_handler.h" />
     <ClInclude Include="qcef\qcef_app.h" />
   </ItemGroup>

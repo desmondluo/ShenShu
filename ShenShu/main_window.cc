@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 	cef_widg_ = new CefWidget(parent);
 
     url_line_edit_ = new QLineEdit;
+    url_line_edit_->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px");
     connect(url_line_edit_, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
 
     auto layout = new QGridLayout;

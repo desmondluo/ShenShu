@@ -14,7 +14,6 @@ QcefApp::QcefApp()
 	{
 		// 如果失败的话, 可能是sanbox的问题
 		CefSettings settings;
-        settings.multi_threaded_message_loop = true;
 		settings.no_sandbox = true;
 		if (!CefInitialize(main_args, settings, nullptr, nullptr))
 		{
@@ -32,9 +31,7 @@ QcefApp::~QcefApp()
 	for (int32_t i = 0; i < (int32_t)m_clients.size(); ++i)
 	{
 		m_clients[i]->GetBrowser()->GetHost()->CloseBrowser(false);
-		//m_clients[i]->Release();
 	}
-    //CefQuitMessageLoop();
 	// 回收CEF的资源
 	CefShutdown();
 }
@@ -58,12 +55,6 @@ CefRefPtr<CefBrowserProcessHandler> QcefApp::GetBrowserProcessHandler()
 	return this;
 }
 
-void QcefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser,
-    CefRefPtr<CefDictionaryValue> extra_info)
-{
-    int32_t a = 0;
-}
-
 CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 {
 	//! 创建一个handler， 并且管理起来
@@ -84,10 +75,4 @@ CefRefPtr<QcefHandler> QcefApp::CreateBrowser(CefWindowHandle winhandler)
 void QcefApp::Run()
 {
     CefDoMessageLoopWork();
-   // CefRunMessageLoop();
-}
-
-void QcefApp::Stop()
-{
-    CefQuitMessageLoop();
 }
