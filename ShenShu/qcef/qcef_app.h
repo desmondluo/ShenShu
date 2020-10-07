@@ -2,64 +2,64 @@
 
 /**
  * @file qcef_app.h
- * @brief CefApp是用来管理所有browser的管理器, 程序可能有很多个browser, 这里进行统一的管理, 同时负责进程级别的回调消息处理
+ * @brief 单个CEF浏览器的handler, 跟单个CefHander对应, 每个APP会持有一个handler
  * @auther desmond
- * @date 2020-09-14
+ * @date 2020-10-07
  * @copyright desmond
  * @version 1.0
  */
 
+
 #ifndef QCEF_QCEF_APP_H_
 #define QCEF_QCEF_APP_H_
 
+#include <string>
 #include "include/cef_app.h"
+#include "include/cef_browser_process_handler.h"
+#include "include/cef_render_process_handler.h"
 #include "cef_handler.h"
 
-/**
- * @brief 全局浏览器管理器, 多个browser，有助于实现tab的功能
- */
-class QcefApp:
-	public CefApp,
-	public CefBrowserProcessHandler
+class QCefApp:
+    public CefApp,
+    public CefBrowserProcessHandler,
+    public CefRenderProcessHandler
 {
 public:
-	/**
-	 * @brief 构造函数
-	 */
-	QcefApp();
-	/**
-	 * @brief 析构函数
-	 */
-	virtual ~QcefApp();
-	/**
-	 * @brirf 全局单例, 任何地方可以获取这个app, 所以这个里面要保证自己的绝对线程安全
-	 */
-	static CefRefPtr<QcefApp> Instance();
-	/**
-	 * @brief 当初始化完毕的回调
-	 */
-	virtual void OnContextInitialized();
-	/**
-	 * @brief 重载获取进程级别重载的类型
-	 */
-	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler();
-	/**
-	 * @brief 创建一个新的brower
-	 * @param winhandler 托管的一个windows ui hwd
-	 * @return 新建的一个brower
-	 */
-	CefRefPtr<QcefHandler> CreateBrowser(CefWindowHandle winhandler);
-	/**
-	 * @brief 开始CEF的消息循环
-	 */
-	virtual void Run();
+    /**
+     * @brief 构造函数
+     * @param index 索引
+     */
+    QCefApp(int32_t index);
+    /**
+     * @brief 析构函数
+     */
+    ~QCefApp();
+    /**
+     * @brief 获取浏览器的handler
+     */
+    virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE;
+    /**
+     * @brief 获取渲染的handler
+     */
+    virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE;
+    /**
+     * @brief 创建浏览器
+     * @param winhandler cef托管的handler
+     * @param url 第一次初始化完毕的url
+     */
+    void CreateBrowser(CefWindowHandle winhandler, std::string url);
+    /**
+     * @brief 获取浏览器
+     * @return 获取到的浏览器
+     */
+    CefRefPtr<CefBrowser> GetBrowser();
 private:
-	//! 不同浏览页面
-	std::vector<CefRefPtr<QcefHandler>> m_clients;
-	//! 自身
-	static CefRefPtr<QcefApp> m_app;
-	//! 定义引用
-	IMPLEMENT_REFCOUNTING(QcefApp);
+    //! 索引
+    int32_t m_index;
+    //! 对应的handler
+    CefRefPtr<QcefHandler> m_ptr_handler;
+private:
+    IMPLEMENT_REFCOUNTING(QCefApp);
 };
 
 #endif

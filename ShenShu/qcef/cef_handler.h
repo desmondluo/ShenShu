@@ -9,42 +9,35 @@
 
 class QcefHandler :
     public CefClient,
-    public CefDisplayHandler,
-    public CefFocusHandler {
+    public CefLifeSpanHandler {
  public:
 	 explicit QcefHandler(int32_t index);
-	 /**
-	  * @brief 外挂一个browser
-	  * @param browser 外挂的浏览器
-	  */
-	 void SetBrower(CefRefPtr<CefBrowser> browser);
 	 /**
 	  * @brief 获取这个handler对应的browser
 	  * @return 对应的browser
 	  */
 	 CefRefPtr<CefBrowser> GetBrowser();
-
-  virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override {
-    return this;
-  }
-
-  virtual CefRefPtr<CefFocusHandler> GetFocusHandler() override {
-    return this;
-  }
-
-  virtual void OnTitleChange(CefRefPtr<CefBrowser> browser,
-                             const CefString& title) override;
-
-  virtual void OnAddressChange(CefRefPtr<CefBrowser> browser,
-                               CefRefPtr<CefFrame> frame,
-                               const CefString& url) override;
-
-  virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) override;
-  /**
-   * @brief 获取这个handler的索引
-   * @param  获得的索引
-   */
-  int32_t Index();
+     /**
+      * @brief 获取浏览器的生命周期控制器
+      * @param browser 浏览器的生命周期handler
+      */
+     virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE;
+     /**
+      * @brief 当浏览器被创建时候的回调
+      * @param browser 浏览器
+      */
+     virtual void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
+     /**
+      * @brief 测试这个是要干嘛
+      * @param browser 浏览器
+      * @return 是否确认
+      */
+     virtual bool DoClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+     /**
+      * @brief 当浏览器将要关闭时候的回调
+      * @param browser 浏览器
+      */
+     virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
 private:
 	//! 索引
 	int32_t m_index;

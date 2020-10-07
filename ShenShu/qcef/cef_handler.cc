@@ -1,32 +1,32 @@
 #include "cef_handler.h"
 
 QcefHandler::QcefHandler(int32_t index):
-	m_index(index)
+	m_index(index),
+    m_browser(nullptr)
 {}
-
-void QcefHandler::SetBrower(CefRefPtr<CefBrowser> browser)
-{
-	m_browser = browser;
-}
 
 CefRefPtr<CefBrowser> QcefHandler::GetBrowser()
 {
 	return m_browser;
 }
 
-void QcefHandler::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString &title) 
+CefRefPtr<CefLifeSpanHandler> QcefHandler::GetLifeSpanHandler()
 {
-
+    return this;
 }
 
-void QcefHandler::OnAddressChange(CefRefPtr<CefBrowser> browser,
-                                 CefRefPtr<CefFrame> frame,
-                                 const CefString &url) {
-	if (frame->IsMain() ) 
-	{
-	}
+void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
+{
+    m_browser = browser;
 }
 
-void QcefHandler::OnGotFocus(CefRefPtr<CefBrowser> browser) 
+bool QcefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 {
+    printf("收到执行关闭的回调\n");
+    return false;
+}
+
+void QcefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
+{
+    printf("收到关闭前的回调\n");
 }

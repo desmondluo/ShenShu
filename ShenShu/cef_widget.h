@@ -9,10 +9,9 @@
 #ifndef QT_CEF_POC_CEFWIDGET_H_
 #define QT_CEF_POC_CEFWIDGET_H_
 
+#include "qcef/qcef_app.h"
+
 #include <QtWidgets>
-#include "include/cef_app.h"
-#include "include/cef_browser.h"
-#include "qcef/cef_handler.h"
 /**
  * @brief CEF的UI托管组件
  */
@@ -51,7 +50,7 @@ class CefWidget: public QWidget {
     void resizeEvent(QResizeEvent *event);
 private:
 	//! 内部托管的cef浏览器
-    CefRefPtr<QcefHandler> m_handler;
+    CefRefPtr<QCefApp> m_ptr_app;
 };
 
 #endif // QT_CEF_POC_CEFWIDGET_H_

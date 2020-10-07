@@ -1,16 +1,15 @@
 #include <QApplication>
 #include "main_window.h"
-#include "qcef/qcef_app.h"
+#include "qcef/sh_app.h"
 
 
 int main(int argc, char *argv[]) {
-	QcefApp::Instance();
+    SHApp::Instance();
 	QApplication app(argc, argv);
 
 	MainWindow win(nullptr);
 	win.show();
 	win.activateWindow();
-	win.raise();
-
-	return app.exec();
+    win.raise();
+    return app.exec();
 }
