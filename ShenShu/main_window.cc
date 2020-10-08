@@ -3,13 +3,20 @@
 #include "qcef/sh_app.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent) 
+    :QMainWindow(parent),
+    m_close_times(0),
+    m_close_timer(nullptr),
+    m_loop_timer(nullptr)
  {
 	//TODO: 用定时器启动CEF的UI消息循环, 当CEF被拆到其他线程的时候, 这个就要被删除
-	if(startTimer(10) == 0) 
+	if(startTimer(100) == 0) 
 	{
 		throw std::runtime_error("Unable to start CEF timer");
 	}
+    m_loop_timer = new QTimer();
+    connect(m_loop_timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
+    m_loop_timer->start(10);
+
 
 	// Common settings
 	setWindowTitle("ShenShu");
@@ -36,15 +43,79 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() 
 {
     int32_t a = 0;
+    if (m_close_timer)
+    {
+        m_close_timer->stop();
+        delete m_close_timer;
+    }
+    if (m_loop_timer)
+    {
+        m_loop_timer->stop();
+        delete m_loop_timer;
+    }
+    if (cef_widg_)
+    {
+        delete cef_widg_;
+    }
+   
+   
 }
 
-void MainWindow::timerEvent(QTimerEvent*) 
+void MainWindow::timerEvent() 
 {
 	// 启动消息循环
-	 SHApp::Instance().Run();
+    if (m_loop_timer->isActive())
+    {
+        SHApp::Instance().Run();
+    }
+    else
+    {
+        int32_t a = 0;
+    }
+	
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    if (m_close_times == 0)
+    {
+        m_close_times += 1;
+        preClose();
+        event->ignore();
+    }
+    else
+    {
+        event->accept();
+    }
+}
+
+void MainWindow::preClose()
+{
+    cef_widg_->DoClose();
+    // 设置一个定时器, 准备检查关闭
+    m_close_timer = new QTimer(this);
+
+    connect(m_close_timer, SIGNAL(timeout()), this, SLOT(CheckClose()));
+    m_close_timer->start(10);
 }
 
 void MainWindow::UrlEntered() 
 {
     cef_widg_->LoadUrl(url_line_edit_->text());
+}
+
+void MainWindow::CheckClose()
+{
+    if (cef_widg_->CefClosed())
+    {
+        this->m_close_timer->stop();
+        if (m_loop_timer)
+        {
+            m_loop_timer->stop();
+        }
+        // SHApp::Instance().Release();
+        // 关闭自己
+        //this->close();
+        
+    }
 }

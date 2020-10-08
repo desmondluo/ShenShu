@@ -39,3 +39,12 @@ CefRefPtr<CefBrowser> QCefApp::GetBrowser()
         return nullptr;
 }
 
+bool QCefApp::IsClose()
+{
+    if (m_ptr_handler)
+    {
+        return m_ptr_handler->IsClosed();
+    }
+    return true;
+}
+

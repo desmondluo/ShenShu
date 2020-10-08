@@ -5,11 +5,15 @@
 
 int main(int argc, char *argv[]) {
     SHApp::Instance();
-	QApplication app(argc, argv);
+	QApplication* app = new QApplication(argc, argv);
 
 	MainWindow win(nullptr);
 	win.show();
 	win.activateWindow();
     win.raise();
-    return app.exec();
+    app->exec();
+    delete app;
+    SHApp::Instance().Release();
+    exit(0);
+
 }

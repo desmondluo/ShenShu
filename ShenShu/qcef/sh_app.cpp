@@ -26,7 +26,9 @@ SHApp::SHApp()
 
 SHApp::~SHApp()
 {
+    CefQuitMessageLoop();
 	CefShutdown();
+    int32_t a = 0;
 }
 
 void SHApp::Release()

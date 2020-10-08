@@ -38,11 +38,18 @@ class QcefHandler :
       * @param browser 浏览器
       */
      virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+     /**
+      * @brief 是否已经关闭
+      * @return 是否已经关闭
+      */
+     bool IsClosed();
 private:
 	//! 索引
 	int32_t m_index;
 	//! CEF的事例
 	CefRefPtr<CefBrowser> m_browser;
+    //! 是否已经关闭
+    bool m_closed;
 
   IMPLEMENT_REFCOUNTING(QcefHandler);
 };

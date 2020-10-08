@@ -53,6 +53,11 @@ public:
      * @return 获取到的浏览器
      */
     CefRefPtr<CefBrowser> GetBrowser();
+    /**
+     * @brief 是否已经关闭
+     * @return 是否已经关闭
+     */
+    bool IsClose();
 private:
     //! 索引
     int32_t m_index;

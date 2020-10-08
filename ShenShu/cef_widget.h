@@ -36,6 +36,14 @@ class CefWidget: public QWidget {
 	 * @brief 当大小发生改变的时候
 	 */
     void UpdateSize();
+    /**
+     * @brief 关闭
+     */
+    void DoClose();
+    /**
+     * @brief CEF是否已经关闭
+     */
+    bool CefClosed();
 
  protected:
 	/**

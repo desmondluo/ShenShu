@@ -11,7 +11,7 @@ CefWidget::CefWidget(QWidget *parent): QWidget(parent)
 
 CefWidget::~CefWidget() 
 {
-    //m_ptr_app->Release();
+    m_ptr_app = nullptr;
 }
 
 void CefWidget::LoadUrl(const QString &url) 
@@ -32,6 +32,14 @@ void CefWidget::resizeEvent(QResizeEvent *event)
     this->UpdateSize();
 }
 
+void CefWidget::DoClose()
+{
+    if (m_ptr_app && m_ptr_app->GetBrowser())
+    {
+        m_ptr_app->GetBrowser()->GetHost()->CloseBrowser(true);
+    }
+}
+
 void CefWidget::UpdateSize()
 {
     // 基本的调整一下大小
@@ -42,4 +50,13 @@ void CefWidget::UpdateSize()
         SetWindowPos(browser_win, (HWND)this->winId(), 0, 0, this->width(), this->height(), SWP_NOZORDER);
         browser_host->NotifyMoveOrResizeStarted();
     }
+}
+
+bool CefWidget::CefClosed()
+{
+    if (m_ptr_app && m_ptr_app->IsClose())
+    {
+        return true;
+    }
+    return false;
 }
