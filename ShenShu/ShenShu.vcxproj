@@ -50,12 +50,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.14.1</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;network</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.14.1</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;network</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -106,6 +106,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="util\file_download.cpp" />
+    <ClCompile Include="ui\cef_tab.cpp" />
     <ClCompile Include="qcef\cef_handler.cc" />
     <ClCompile Include="ui\cef_widget.cc" />
     <ClCompile Include="ui\main_window.cc" />
@@ -120,12 +122,15 @@
     <QtMoc Include="ui\cef_widget.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ui\cef_tab.h" />
+    <QtMoc Include="util\file_download.h" />
     <ClInclude Include="qcef\cef_handler.h" />
     <ClInclude Include="qcef\sh_app.h" />
     <ClInclude Include="qcef\qcef_app.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="ui\cef.qss" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

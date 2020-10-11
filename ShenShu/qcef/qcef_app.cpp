@@ -1,9 +1,8 @@
 ﻿#include "qcef_app.h"
 
-QCefApp::QCefApp(int32_t index):
-    m_index(index)
+QCefApp::QCefApp(CefTab* tab)
 {
-    m_ptr_handler = new QcefHandler(m_index);
+    m_ptr_handler = new QcefHandler(tab);
 }
 
 QCefApp::~QCefApp()

@@ -8,8 +8,10 @@
  */
 #ifndef QT_CEF_POC_CEFWIDGET_H_
 #define QT_CEF_POC_CEFWIDGET_H_
+#include <include/cef_app.h>
 
-#include "../qcef/qcef_app.h"
+class QCefApp;
+
 #include <QtWidgets>
 /**
  * @brief CEF的UI托管组件

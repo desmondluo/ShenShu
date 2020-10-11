@@ -6,12 +6,15 @@
 
 #include <QtWidgets>
 #include "include/cef_client.h"
+#include "../ui/cef_tab.h"
 
 class QcefHandler :
     public CefClient,
-    public CefLifeSpanHandler {
+    public CefLifeSpanHandler,
+    public CefDisplayHandler
+{
  public:
-     explicit QcefHandler(int32_t index);
+     explicit QcefHandler(CefTab* tab);
      /**
       * @brief 获取这个handler对应的browser
       * @return 对应的browser
@@ -19,9 +22,14 @@ class QcefHandler :
      CefRefPtr<CefBrowser> GetBrowser();
      /**
       * @brief 获取浏览器的生命周期控制器
-      * @param browser 浏览器的生命周期handler
+      * @return browser 浏览器的生命周期handler
       */
      virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE;
+     /**
+      * @brief 获取外观的handler
+      * @return 外观handler
+      */
+     virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE;
      /**
       * @brief 当浏览器被创建时候的回调
       * @param browser 浏览器
@@ -38,6 +46,27 @@ class QcefHandler :
       * @param browser 浏览器
       */
      virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+    /**
+     * @brief 重载当打开新的window
+     */
+     virtual bool OnBeforePopup(CefRefPtr<CefBrowser> browser,
+         CefRefPtr<CefFrame> frame,
+         const CefString& target_url,
+         const CefString& target_frame_name,
+         WindowOpenDisposition target_disposition,
+         bool user_gesture,
+         const CefPopupFeatures& popupFeatures,
+         CefWindowInfo& windowInfo,
+         CefRefPtr<CefClient>& client,
+         CefBrowserSettings& settings,
+         CefRefPtr<CefDictionaryValue>& extra_info,
+         bool* no_javascript_access) OVERRIDE;
+     /**
+      * @brief 当图标发生改变
+      */
+     virtual void OnFaviconURLChange(CefRefPtr<CefBrowser> browser,
+         const std::vector<CefString>& icon_urls) OVERRIDE;
+
      /**
       * @brief 是否已经关闭
       * @return 是否已经关闭
@@ -50,6 +79,8 @@ private:
     CefRefPtr<CefBrowser> m_browser;
     //! 是否已经关闭
     bool m_closed;
+    //! cef的tab
+    CefTab* m_cef_tab;
 
   IMPLEMENT_REFCOUNTING(QcefHandler);
 };

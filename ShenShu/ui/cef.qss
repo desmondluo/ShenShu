@@ -1,0 +1,32 @@
+QTabWidget::tab-bar {
+ background-color: black;
+}
+
+QTabBar::tab {
+    background-color: #4094da;
+    border-color:white;
+    font: bold 12px 'Arial';
+    color: white;
+    height:60px;
+
+}
+QTabBar::tab:!selected {
+    background-color: #9E9E9E;
+    color: white;
+ }
+
+
+QTabBar::close-button {
+    background-position: center;
+    background-image: url(":/Appearance/close_chat_item");
+}
+
+ QTabWidget::pane { 
+     position: absolute;
+ }
+
+QTabBar::tab:selected {
+    border-color:#4094da;
+    background-color: #4094da;
+    color: white;
+}

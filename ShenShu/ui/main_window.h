@@ -40,12 +40,7 @@ protected:
      */
     void preClose();
 private:
-	//! CEF的UI托管体
-	CefWidget *cef_widg_;
-	//! 上面的地址栏
-	QLineEdit *url_line_edit_;
-	//! 整体layout
-	QGridLayout *layout;
+    QTabWidget* m_tab_widget;
     //! 关闭次数
     int32_t m_close_times;
     //! 关闭定时器

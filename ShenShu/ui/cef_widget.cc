@@ -35,7 +35,7 @@ void CefWidget::DoClose()
 {
     if (m_ptr_app && m_ptr_app->GetBrowser())
     {
-        m_ptr_app->GetBrowser()->GetHost()->CloseBrowser(true);
+        m_ptr_app->GetBrowser()->GetHost()->CloseBrowser(false);
     }
 }
 

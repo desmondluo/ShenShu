@@ -29,7 +29,7 @@ public:
      * @brief 构造函数
      * @param index 索引
      */
-    QCefApp(int32_t index);
+    QCefApp(CefTab* tab);
     /**
      * @brief 析构函数
      */
@@ -59,8 +59,6 @@ public:
      */
     bool IsClose();
 private:
-    //! 索引
-    int32_t m_index;
     //! 对应的handler
     CefRefPtr<QcefHandler> m_ptr_handler;
 private:

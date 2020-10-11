@@ -9,10 +9,10 @@ int main(int argc, char *argv[]) {
         return SHApp::Instance().ExitCode();
     }
     
-	QApplication app(argc, argv);
-	MainWindow win(nullptr);
-	win.show();
-	win.activateWindow();
+    QApplication app(argc, argv);
+    MainWindow win(nullptr);
+    win.show();
+    win.activateWindow();
     win.raise();
     int32_t ret = app.exec();
     SHApp::Instance().Release();

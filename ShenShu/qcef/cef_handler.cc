@@ -1,9 +1,11 @@
 ﻿#include "cef_handler.h"
 
-QcefHandler::QcefHandler(int32_t index):
-    m_index(index),
+#include "include/wrapper/cef_helpers.h"
+
+QcefHandler::QcefHandler(CefTab* tab):
     m_browser(nullptr),
-    m_closed(false)
+    m_closed(false),
+    m_cef_tab(tab)
 {}
 
 CefRefPtr<CefBrowser> QcefHandler::GetBrowser()
@@ -16,6 +18,11 @@ CefRefPtr<CefLifeSpanHandler> QcefHandler::GetLifeSpanHandler()
     return this;
 }
 
+CefRefPtr<CefDisplayHandler> QcefHandler::GetDisplayHandler()
+{
+    return this;
+}
+
 void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
     m_browser = browser;
@@ -23,14 +30,47 @@ void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 
 bool QcefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 {
-    printf("收到执行关闭的回调\n");
     return false;
 }
 
 void QcefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
-    printf("收到关闭前的回调\n");
     m_closed = true;
+}
+
+bool QcefHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame, 
+    const CefString& target_url,
+    const CefString& target_frame_name,
+    WindowOpenDisposition target_disposition, 
+    bool user_gesture,
+    const CefPopupFeatures& popupFeatures,
+    CefWindowInfo& windowInfo,
+    CefRefPtr<CefClient>& client,
+    CefBrowserSettings& settings,
+    CefRefPtr<CefDictionaryValue>& extra_info, 
+    bool* no_javascript_access)
+{
+    switch (target_disposition)
+    {
+    case WOD_NEW_FOREGROUND_TAB:
+    case WOD_NEW_BACKGROUND_TAB:
+    case WOD_NEW_POPUP:
+    case WOD_NEW_WINDOW:
+        browser->GetMainFrame()->LoadURL(target_url);
+        return true; //cancel create
+    }
+    return false;
+}
+
+void QcefHandler::OnFaviconURLChange(CefRefPtr<CefBrowser> browser, const std::vector<CefString>& icon_urls)
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    if (icon_urls.size() > 0)
+    {
+        //m_cef_tab->ChangeIcon(QString::fromStdString(icon_urls[0].ToString()));
+    }
 }
 
 bool QcefHandler::IsClosed()
