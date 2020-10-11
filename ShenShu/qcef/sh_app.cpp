@@ -9,17 +9,17 @@ SHApp::SHApp()
     CefEnableHighDPISupport();
     // 命令行初始化, 并不打算加入什么初始化命令，如果后面要加的话, 直接这个地方加就好了
     CefMainArgs main_args;
-    int32_t excode = CefExecuteProcess(main_args, nullptr, nullptr);
-    if (excode < 0)
+    m_exit = CefExecuteProcess(main_args, nullptr, nullptr);
+    if (m_exit < 0)
     {
         // 如果失败的话, 可能是sanbox的问题
         CefSettings settings;
         settings.no_sandbox = true;
         if (!CefInitialize(main_args, settings, nullptr, nullptr))
         {
-            throw std::runtime_error("启动CEF进程失败, 错误码:" + std::to_string(excode));
+            throw std::runtime_error("启动CEF进程失败, 错误码:" + std::to_string(m_exit));
             // 直接退出
-            exit(excode);
+            exit(m_exit);
         }
     }
 }
@@ -50,4 +50,9 @@ SHApp& SHApp::Instance()
 void SHApp::Run()
 {
     CefDoMessageLoopWork();
+}
+
+int32_t SHApp::ExitCode()
+{
+    return m_exit;
 }

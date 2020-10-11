@@ -41,9 +41,15 @@ public:
 	 * @brief 开始CEF的消息循环
 	 */
 	virtual void Run();
+    /**
+     * @brief 退出码
+     */
+    int32_t ExitCode();
 private:
 	//! 自身
     static SHApp* m_app;
+    //! 子进程, close之前会有一次进程进入, 是要退出的
+    int32_t m_exit;
 };
 
 #endif

@@ -4,16 +4,17 @@
 
 
 int main(int argc, char *argv[]) {
-    SHApp::Instance();
-	QApplication* app = new QApplication(argc, argv);
-
+    if (SHApp::Instance().ExitCode() >= 0)
+    {
+        return SHApp::Instance().ExitCode();
+    }
+    
+	QApplication app(argc, argv);
 	MainWindow win(nullptr);
 	win.show();
 	win.activateWindow();
     win.raise();
-    app->exec();
-    delete app;
+    int32_t ret = app.exec();
     SHApp::Instance().Release();
-    exit(0);
-
+    return ret;
 }
