@@ -1,6 +1,6 @@
-/**
+ï»¿/**
  * @file cef_widget.h
- * @brief CEFµÄÍĞ¹Ü×é¼ş
+ * @brief CEFçš„æ‰˜ç®¡ç»„ä»¶
  * @auther desmond
  * @date 2020-09-16
  * @copyright desmond
@@ -9,55 +9,54 @@
 #ifndef QT_CEF_POC_CEFWIDGET_H_
 #define QT_CEF_POC_CEFWIDGET_H_
 
-#include "qcef/qcef_app.h"
-
+#include "../qcef/qcef_app.h"
 #include <QtWidgets>
 /**
- * @brief CEFµÄUIÍĞ¹Ü×é¼ş
+ * @brief CEFçš„UIæ‰˜ç®¡ç»„ä»¶
  */
 class CefWidget: public QWidget {
   Q_OBJECT
  public:
 	/**
-	 * @brief ¹¹Ôìº¯Êı
-	 * @param ¸¸½Úµã
+	 * @brief æ„é€ å‡½æ•°
+	 * @param çˆ¶èŠ‚ç‚¹
 	 */
 	CefWidget(QWidget *parent = 0);
 	/**
-	 * @brief Îö¹¹º¯Êı
+	 * @brief ææ„å‡½æ•°
 	 */
     ~CefWidget();
 	/**
-	 * @brief µ±¼ÓÔØĞÂµÄurlµÄÊ±ºò
-	 * @param url ĞÂµÄurl
+	 * @brief å½“åŠ è½½æ–°çš„urlçš„æ—¶å€™
+	 * @param url æ–°çš„url
 	 */
     void LoadUrl(const QString &url);
 	/**
-	 * @brief µ±´óĞ¡·¢Éú¸Ä±äµÄÊ±ºò
+	 * @brief å½“å¤§å°å‘ç”Ÿæ”¹å˜çš„æ—¶å€™
 	 */
     void UpdateSize();
     /**
-     * @brief ¹Ø±Õ
+     * @brief å…³é—­
      */
     void DoClose();
     /**
-     * @brief CEFÊÇ·ñÒÑ¾­¹Ø±Õ
+     * @brief CEFæ˜¯å¦å·²ç»å…³é—­
      */
     bool CefClosed();
 
  protected:
 	/**
-	 * @brief µ±ÒÆ¶¯µÄÊ±ºò
-	 * @param ÒÆ¶¯ÊÂ¼ş
+	 * @brief å½“ç§»åŠ¨çš„æ—¶å€™
+	 * @param ç§»åŠ¨äº‹ä»¶
 	 */
     void moveEvent(QMoveEvent *event);
 	/**
-	 * @brief µ±´óĞ¡·¢Éú¸Ä±äµÄÊ±ºò
-	 * @param ´óĞ¡¸Ä±äÊÂ¼ş
+	 * @brief å½“å¤§å°å‘ç”Ÿæ”¹å˜çš„æ—¶å€™
+	 * @param å¤§å°æ”¹å˜äº‹ä»¶
 	 */
     void resizeEvent(QResizeEvent *event);
 private:
-	//! ÄÚ²¿ÍĞ¹ÜµÄcefä¯ÀÀÆ÷
+	//! å†…éƒ¨æ‰˜ç®¡çš„cefæµè§ˆå™¨
     CefRefPtr<QCefApp> m_ptr_app;
 };
 

@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 /**
  * @file qcef_app.h
- * @brief µ¥¸öCEFä¯ÀÀÆ÷µÄhandler, ¸úµ¥¸öCefHander¶ÔÓ¦, Ã¿¸öAPP»á³ÖÓĞÒ»¸öhandler
+ * @brief å•ä¸ªCEFæµè§ˆå™¨çš„handler, è·Ÿå•ä¸ªCefHanderå¯¹åº”, æ¯ä¸ªAPPä¼šæŒæœ‰ä¸€ä¸ªhandler
  * @auther desmond
  * @date 2020-10-07
  * @copyright desmond
@@ -26,42 +26,42 @@ class QCefApp:
 {
 public:
     /**
-     * @brief ¹¹Ôìº¯Êı
-     * @param index Ë÷Òı
+     * @brief æ„é€ å‡½æ•°
+     * @param index ç´¢å¼•
      */
     QCefApp(int32_t index);
     /**
-     * @brief Îö¹¹º¯Êı
+     * @brief ææ„å‡½æ•°
      */
     ~QCefApp();
     /**
-     * @brief »ñÈ¡ä¯ÀÀÆ÷µÄhandler
+     * @brief è·å–æµè§ˆå™¨çš„handler
      */
     virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE;
     /**
-     * @brief »ñÈ¡äÖÈ¾µÄhandler
+     * @brief è·å–æ¸²æŸ“çš„handler
      */
     virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE;
     /**
-     * @brief ´´½¨ä¯ÀÀÆ÷
-     * @param winhandler cefÍĞ¹ÜµÄhandler
-     * @param url µÚÒ»´Î³õÊ¼»¯Íê±ÏµÄurl
+     * @brief åˆ›å»ºæµè§ˆå™¨
+     * @param winhandler cefæ‰˜ç®¡çš„handler
+     * @param url ç¬¬ä¸€æ¬¡åˆå§‹åŒ–å®Œæ¯•çš„url
      */
     void CreateBrowser(CefWindowHandle winhandler, std::string url);
     /**
-     * @brief »ñÈ¡ä¯ÀÀÆ÷
-     * @return »ñÈ¡µ½µÄä¯ÀÀÆ÷
+     * @brief è·å–æµè§ˆå™¨
+     * @return è·å–åˆ°çš„æµè§ˆå™¨
      */
     CefRefPtr<CefBrowser> GetBrowser();
     /**
-     * @brief ÊÇ·ñÒÑ¾­¹Ø±Õ
-     * @return ÊÇ·ñÒÑ¾­¹Ø±Õ
+     * @brief æ˜¯å¦å·²ç»å…³é—­
+     * @return æ˜¯å¦å·²ç»å…³é—­
      */
     bool IsClose();
 private:
-    //! Ë÷Òı
+    //! ç´¢å¼•
     int32_t m_index;
-    //! ¶ÔÓ¦µÄhandler
+    //! å¯¹åº”çš„handler
     CefRefPtr<QcefHandler> m_ptr_handler;
 private:
     IMPLEMENT_REFCOUNTING(QCefApp);

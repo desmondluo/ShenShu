@@ -1,24 +1,24 @@
-#include "sh_app.h"
+﻿#include "sh_app.h"
 
 SHApp* SHApp::m_app = nullptr;
 
 SHApp::SHApp()
 {
-    // ��һЩCEF��ȫ�ֳ�ʼ���Ķ���
-    // ��ʼ����DPI��֧��
+    // 做一些CEF的全局初始化的东西
+    // 初始化高DPI的支持
     CefEnableHighDPISupport();
-    // �����г�ʼ��, �����������ʲô��ʼ������������Ҫ�ӵĻ�, ֱ������ط��Ӿͺ���
+    // 命令行初始化, 并不打算加入什么初始化命令，如果后面要加的话, 直接这个地方加就好了
     CefMainArgs main_args;
     m_exit = CefExecuteProcess(main_args, nullptr, nullptr);
     if (m_exit < 0)
     {
-        // ���ʧ�ܵĻ�, ������sanbox������
+        // 如果失败的话, 可能是sanbox的问题
         CefSettings settings;
         settings.no_sandbox = true;
         if (!CefInitialize(main_args, settings, nullptr, nullptr))
         {
-            throw std::runtime_error("����CEF����ʧ��, ������:" + std::to_string(m_exit));
-            // ֱ���˳�
+            throw std::runtime_error("启动CEF进程失败, 错误码:" + std::to_string(m_exit));
+            // 直接退出
             exit(m_exit);
         }
     }
@@ -28,7 +28,6 @@ SHApp::~SHApp()
 {
     CefQuitMessageLoop();
 	CefShutdown();
-    int32_t a = 0;
 }
 
 void SHApp::Release()

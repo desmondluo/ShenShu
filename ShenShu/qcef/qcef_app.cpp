@@ -1,4 +1,4 @@
-#include "qcef_app.h"
+ï»¿#include "qcef_app.h"
 
 QCefApp::QCefApp(int32_t index):
     m_index(index)
@@ -26,7 +26,7 @@ void QCefApp::CreateBrowser(CefWindowHandle winhandler, std::string url)
     CefWindowInfo wininfo;
     CefBrowserSettings settings;
     //settings.multi_threaded_message_loop = true;
-    // µÚÒ»´Î²¢²»ÖªµÀÔÚÄÄµÄ, µ«ÊÇÕâ¸ö²»ÖØÒª, ºóÃæÒ»µ©Íâ²¿µÄUI³õÊ¼»¯Íê±Ï, ¾Í»áÖ÷¶¯Í¨ÖªÕâ¸öUI, ×ö¶ÔÓ¦µÄµ÷Õû
+    // ç¬¬ä¸€æ¬¡å¹¶ä¸çŸ¥é“åœ¨å“ªçš„, ä½†æ˜¯è¿™ä¸ªä¸é‡è¦, åé¢ä¸€æ—¦å¤–éƒ¨çš„UIåˆå§‹åŒ–å®Œæ¯•, å°±ä¼šä¸»åŠ¨é€šçŸ¥è¿™ä¸ªUI, åšå¯¹åº”çš„è°ƒæ•´
     wininfo.SetAsChild(winhandler, RECT{ 0, 0, 0, 0 });
     CefBrowserHost::CreateBrowserSync(wininfo, m_ptr_handler, CefString("http://baidu.com"), settings, nullptr, nullptr);
 }

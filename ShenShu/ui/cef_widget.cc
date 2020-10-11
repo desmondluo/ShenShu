@@ -1,9 +1,9 @@
-#include "cef_widget.h"
-#include "qcef/qcef_app.h"
+ï»¿#include "cef_widget.h"
+#include "../qcef/qcef_app.h"
 
 CefWidget::CefWidget(QWidget *parent): QWidget(parent) 
 {
-	// ³õÊ¼»¯Ò»¸öä¯ÀÀÆ÷
+	// åˆå§‹åŒ–ä¸€ä¸ªæµè§ˆå™¨
     m_ptr_app = new QCefApp(0);
     m_ptr_app->CreateBrowser((CefWindowHandle)winId(), "http://baidu.com");
 	//m_handler = QcefApp::Instance()->CreateBrowser((CefWindowHandle)winId());
@@ -42,7 +42,7 @@ void CefWidget::DoClose()
 
 void CefWidget::UpdateSize()
 {
-    // »ù±¾µÄµ÷ÕûÒ»ÏÂ´óÐ¡
+    // åŸºæœ¬çš„è°ƒæ•´ä¸€ä¸‹å¤§å°
     if (m_ptr_app && m_ptr_app->GetBrowser())
     {
         auto browser_host = m_ptr_app->GetBrowser()->GetHost();

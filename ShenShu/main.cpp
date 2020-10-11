@@ -1,5 +1,5 @@
-#include <QApplication>
-#include "main_window.h"
+﻿#include <QApplication>
+#include "ui/main_window.h"
 #include "qcef/sh_app.h"
 
 

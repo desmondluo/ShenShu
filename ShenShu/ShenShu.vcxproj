@@ -107,17 +107,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="qcef\cef_handler.cc" />
-    <ClCompile Include="cef_widget.cc" />
-    <ClCompile Include="main_window.cc" />
+    <ClCompile Include="ui\cef_widget.cc" />
+    <ClCompile Include="ui\main_window.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qcef\sh_app.cpp" />
     <ClCompile Include="qcef\qcef_app.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="main_window.h" />
+    <QtMoc Include="ui\main_window.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="cef_widget.h" />
+    <QtMoc Include="ui\cef_widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qcef\cef_handler.h" />

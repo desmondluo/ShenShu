@@ -1,6 +1,6 @@
-/**
+ï»¿/**
  * @file main_window.h
- * @brief Õû¸ö¿ò¼ÜµÄwindow
+ * @brief æ•´ä¸ªæ¡†æ¶çš„window
  * @auther desmond
  * @date 2020-09-16
  * @copyright desmond
@@ -14,53 +14,56 @@
 #include "cef_widget.h"
 
 /**
- * @brief UI¿ò¼Ü
+ * @brief UIæ¡†æ¶
  */
 class MainWindow: public QMainWindow {
   Q_OBJECT
 public:
 	/**
-	 * @brief ¹¹Ôìº¯Êı
-	 * @param ¸¸½Úµã
+	 * @brief æ„é€ å‡½æ•°
+	 * @param çˆ¶èŠ‚ç‚¹
 	 */
 	MainWindow(QWidget *parent = 0);
 	/**
-	 * @brief Îö¹¹º¯Êı
+	 * @brief ææ„å‡½æ•°
 	 */
 	~MainWindow();
 
 protected:
     /**
-     * @brief ÊÕµ½¹Ø±ÕÊÂ¼ş
-     * @param event ÊÂ¼ş
+     * @brief æ”¶åˆ°å…³é—­äº‹ä»¶
+     * @param event äº‹ä»¶
      */
     void closeEvent(QCloseEvent* event);
+    /**
+     * @brief å‡†å¤‡å…³é—­
+     */
     void preClose();
 private:
-	//! CEFµÄUIÍĞ¹ÜÌå
+	//! CEFçš„UIæ‰˜ç®¡ä½“
 	CefWidget *cef_widg_;
-	//! ÉÏÃæµÄµØÖ·À¸
+	//! ä¸Šé¢çš„åœ°å€æ 
 	QLineEdit *url_line_edit_;
-	//! ÕûÌålayout
+	//! æ•´ä½“layout
 	QGridLayout *layout;
-    //! ¹Ø±Õ´ÎÊı
+    //! å…³é—­æ¬¡æ•°
     int32_t m_close_times;
-    //! ¹Ø±Õ¶¨Ê±Æ÷
+    //! å…³é—­å®šæ—¶å™¨
     QTimer* m_close_timer;
-    //! CEFµÄÏûÏ¢Ñ­»·¶¨Ê±Æ÷
+    //! CEFçš„æ¶ˆæ¯å¾ªç¯å®šæ—¶å™¨
     QTimer* m_loop_timer;
 private slots:
 	/**
-	 * @brief µ±url±»ÊäÈëÊ±ºòµÄ»Øµ÷
+	 * @brief å½“urlè¢«è¾“å…¥æ—¶å€™çš„å›è°ƒ
 	 */
 	void UrlEntered();
     /**
-     * @brief ¼ì²é¹Ø±ÕÊ±ºòµÄ»Øµ÷
+     * @brief æ£€æŸ¥å…³é—­æ—¶å€™çš„å›è°ƒ
      */
     void CheckClose();
     /**
-     * @brief ¶¨Ê±Æ÷´¥·¢
-     * @param ¶¨Ê±Æ÷ÊÂ¼ş
+     * @brief å®šæ—¶å™¨è§¦å‘
+     * @param å®šæ—¶å™¨äº‹ä»¶
      */
     void timerEvent();
 };

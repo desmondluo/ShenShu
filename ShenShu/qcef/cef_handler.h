@@ -1,5 +1,5 @@
-/**
- * @brief CEFHandlerµÄÊµÏÖ, ÖÕ¼«Boss
+ï»¿/**
+ * @brief CEFHandlerçš„å®ç°, ç»ˆæBoss
  */
 #ifndef QT_CEF_POC_HANDLER_H_
 #define QT_CEF_POC_HANDLER_H_
@@ -13,42 +13,42 @@ class QcefHandler :
  public:
 	 explicit QcefHandler(int32_t index);
 	 /**
-	  * @brief »ñÈ¡Õâ¸öhandler¶ÔÓ¦µÄbrowser
-	  * @return ¶ÔÓ¦µÄbrowser
+	  * @brief è·å–è¿™ä¸ªhandlerå¯¹åº”çš„browser
+	  * @return å¯¹åº”çš„browser
 	  */
 	 CefRefPtr<CefBrowser> GetBrowser();
      /**
-      * @brief »ñÈ¡ä¯ÀÀÆ÷µÄÉúÃüÖÜÆÚ¿ØÖÆÆ÷
-      * @param browser ä¯ÀÀÆ÷µÄÉúÃüÖÜÆÚhandler
+      * @brief è·å–æµè§ˆå™¨çš„ç”Ÿå‘½å‘¨æœŸæ§åˆ¶å™¨
+      * @param browser æµè§ˆå™¨çš„ç”Ÿå‘½å‘¨æœŸhandler
       */
      virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE;
      /**
-      * @brief µ±ä¯ÀÀÆ÷±»´´½¨Ê±ºòµÄ»Øµ÷
-      * @param browser ä¯ÀÀÆ÷
+      * @brief å½“æµè§ˆå™¨è¢«åˆ›å»ºæ—¶å€™çš„å›è°ƒ
+      * @param browser æµè§ˆå™¨
       */
      virtual void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
      /**
-      * @brief ²âÊÔÕâ¸öÊÇÒª¸ÉÂï
-      * @param browser ä¯ÀÀÆ÷
-      * @return ÊÇ·ñÈ·ÈÏ
+      * @brief æµ‹è¯•è¿™ä¸ªæ˜¯è¦å¹²å˜›
+      * @param browser æµè§ˆå™¨
+      * @return æ˜¯å¦ç¡®è®¤
       */
      virtual bool DoClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
      /**
-      * @brief µ±ä¯ÀÀÆ÷½«Òª¹Ø±ÕÊ±ºòµÄ»Øµ÷
-      * @param browser ä¯ÀÀÆ÷
+      * @brief å½“æµè§ˆå™¨å°†è¦å…³é—­æ—¶å€™çš„å›è°ƒ
+      * @param browser æµè§ˆå™¨
       */
      virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
      /**
-      * @brief ÊÇ·ñÒÑ¾­¹Ø±Õ
-      * @return ÊÇ·ñÒÑ¾­¹Ø±Õ
+      * @brief æ˜¯å¦å·²ç»å…³é—­
+      * @return æ˜¯å¦å·²ç»å…³é—­
       */
      bool IsClosed();
 private:
-	//! Ë÷Òı
+	//! ç´¢å¼•
 	int32_t m_index;
-	//! CEFµÄÊÂÀı
+	//! CEFçš„äº‹ä¾‹
 	CefRefPtr<CefBrowser> m_browser;
-    //! ÊÇ·ñÒÑ¾­¹Ø±Õ
+    //! æ˜¯å¦å·²ç»å…³é—­
     bool m_closed;
 
   IMPLEMENT_REFCOUNTING(QcefHandler);

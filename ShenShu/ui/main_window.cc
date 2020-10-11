@@ -1,6 +1,8 @@
-#include "main_window.h"
-#include "qcef/qcef_app.h"
-#include "qcef/sh_app.h"
+ï»¿#include "main_window.h"
+#include "../qcef/qcef_app.h"
+#include "../qcef/sh_app.h"
+#include <QTabWidget>
+
 
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent),
@@ -8,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_close_timer(nullptr),
     m_loop_timer(nullptr)
  {
-	//TODO: ÓÃ¶¨Ê±Æ÷Æô¶¯CEFµÄUIÏûÏ¢Ñ­»·, µ±CEF±»²ðµ½ÆäËûÏß³ÌµÄÊ±ºò, Õâ¸ö¾ÍÒª±»É¾³ý
+	//TODO: ç”¨å®šæ—¶å™¨å¯åŠ¨CEFçš„UIæ¶ˆæ¯å¾ªçŽ¯, å½“CEFè¢«æ‹†åˆ°å…¶ä»–çº¿ç¨‹çš„æ—¶å€™, è¿™ä¸ªå°±è¦è¢«åˆ é™¤
 	if(startTimer(100) == 0) 
 	{
 		throw std::runtime_error("Unable to start CEF timer");
@@ -16,13 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     m_loop_timer = new QTimer();
     connect(m_loop_timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
     m_loop_timer->start(10);
-
-
-	// Common settings
-	setWindowTitle("ShenShu");
+    // Common settings
+    
+    setWindowTitle("ShenShu");
     setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-	resize(1024, 768);
-	cef_widg_ = new CefWidget(parent);
+    resize(1024, 768);
+    cef_widg_ = new CefWidget(parent);
 
     url_line_edit_ = new QLineEdit;
     //url_line_edit_->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px");
@@ -37,7 +38,11 @@ MainWindow::MainWindow(QWidget *parent)
     layout->setRowStretch(1, 1);
     auto frame = new QFrame;
     frame->setLayout(layout);
-    setCentralWidget(frame);
+
+    auto tab = new QTabWidget;
+    tab->addTab(frame, QString("æµ‹è¯•"));
+
+    setCentralWidget(tab);
 }
 
 MainWindow::~MainWindow() 
@@ -63,14 +68,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::timerEvent() 
 {
-	// Æô¶¯ÏûÏ¢Ñ­»·
+	// å¯åŠ¨æ¶ˆæ¯å¾ªçŽ¯
     if (m_loop_timer->isActive())
     {
         SHApp::Instance().Run();
-    }
-    else
-    {
-        int32_t a = 0;
     }
 	
 }
@@ -92,7 +93,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
 void MainWindow::preClose()
 {
     cef_widg_->DoClose();
-    // ÉèÖÃÒ»¸ö¶¨Ê±Æ÷, ×¼±¸¼ì²é¹Ø±Õ
+    // è®¾ç½®ä¸€ä¸ªå®šæ—¶å™¨, å‡†å¤‡æ£€æŸ¥å…³é—­
     m_close_timer = new QTimer(this);
 
     connect(m_close_timer, SIGNAL(timeout()), this, SLOT(CheckClose()));
@@ -113,9 +114,6 @@ void MainWindow::CheckClose()
         {
             m_loop_timer->stop();
         }
-        // SHApp::Instance().Release();
-        // ¹Ø±Õ×Ô¼º
-        //this->close();
-        
+        this->close();
     }
 }

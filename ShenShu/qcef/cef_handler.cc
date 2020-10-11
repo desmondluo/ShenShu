@@ -1,4 +1,4 @@
-#include "cef_handler.h"
+﻿#include "cef_handler.h"
 
 QcefHandler::QcefHandler(int32_t index):
 	m_index(index),
@@ -23,13 +23,13 @@ void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 
 bool QcefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 {
-    printf("�յ�ִ�йرյĻص�\n");
+    printf("收到执行关闭的回调\n");
     return false;
 }
 
 void QcefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
-    printf("�յ��ر�ǰ�Ļص�\n");
+    printf("收到关闭前的回调\n");
     m_closed = true;
 }
 

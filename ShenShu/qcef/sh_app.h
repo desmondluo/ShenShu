@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 /**
  * @file sh_app.h
- * @brief SHApp��������������browser�Ĺ�����, ��������кܶ��browser, �������ͳһ�Ĺ���, ͬʱ������̼���Ļص���Ϣ����
+ * @brief SHApp是用来管理所有browser的管理器, 程序可能有很多个browser, 这里进行统一的管理, 同时负责进程级别的回调消息处理
  * @auther desmond
  * @date 2020-09-14
  * @copyright desmond
@@ -16,39 +16,39 @@
 #include "cef_handler.h"
 
 /**
- * @brief ȫ�������������, ���browser��������ʵ��tab�Ĺ���
+ * @brief 全局浏览器管理器, 多个browser，有助于实现tab的功能
  */
 class SHApp
 {
 public:
 	/**
-	 * @brief ���캯��
+	 * @brief 构造函数
 	 */
     SHApp();
 	/**
-	 * @brief ��������
+	 * @brief 析构函数
 	 */
 	virtual ~SHApp();
     /**
-     * @brief �ͷ�����
+     * @brief 释放自身
      */
     void Release();
 	/**
-	 * @brirf ȫ�ֵ���, �κεط����Ի�ȡ���app, �����������Ҫ��֤�Լ��ľ����̰߳�ȫ
+	 * @brirf 全局单例, 任何地方可以获取这个app, 所以这个里面要保证自己的绝对线程安全
 	 */
 	static SHApp& Instance();
 	/**
-	 * @brief ��ʼCEF����Ϣѭ��
+	 * @brief 开始CEF的消息循环
 	 */
 	virtual void Run();
     /**
-     * @brief �˳���
+     * @brief 退出码
      */
     int32_t ExitCode();
 private:
-	//! ����
+	//! 自身
     static SHApp* m_app;
-    //! �ӽ���, close֮ǰ����һ�ν��̽���, ��Ҫ�˳���
+    //! 子进程, close之前会有一次进程进入, 是要退出的
     int32_t m_exit;
 };
 
