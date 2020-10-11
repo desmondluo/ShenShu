@@ -17,23 +17,23 @@
 class CefWidget: public QWidget {
   Q_OBJECT
  public:
-	/**
-	 * @brief 构造函数
-	 * @param 父节点
-	 */
-	CefWidget(QWidget *parent = 0);
-	/**
-	 * @brief 析构函数
-	 */
+    /**
+     * @brief 构造函数
+    * @param 父节点
+     */
+    CefWidget(QWidget *parent = 0);
+    /**
+     * @brief 析构函数
+     */
     ~CefWidget();
-	/**
-	 * @brief 当加载新的url的时候
-	 * @param url 新的url
-	 */
+    /**
+     * @brief 当加载新的url的时候
+     * @param url 新的url
+     */
     void LoadUrl(const QString &url);
-	/**
-	 * @brief 当大小发生改变的时候
-	 */
+    /**
+     * @brief 当大小发生改变的时候
+     */
     void UpdateSize();
     /**
      * @brief 关闭
@@ -45,18 +45,18 @@ class CefWidget: public QWidget {
     bool CefClosed();
 
  protected:
-	/**
-	 * @brief 当移动的时候
-	 * @param 移动事件
-	 */
+    /**
+     * @brief 当移动的时候
+     * @param 移动事件
+     */
     void moveEvent(QMoveEvent *event);
-	/**
-	 * @brief 当大小发生改变的时候
-	 * @param 大小改变事件
-	 */
+    /**
+     * @brief 当大小发生改变的时候
+     * @param 大小改变事件
+     */
     void resizeEvent(QResizeEvent *event);
 private:
-	//! 内部托管的cef浏览器
+    //! 内部托管的cef浏览器
     CefRefPtr<QCefApp> m_ptr_app;
 };
 

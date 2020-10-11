@@ -1,14 +1,14 @@
 ﻿#include "cef_handler.h"
 
 QcefHandler::QcefHandler(int32_t index):
-	m_index(index),
+    m_index(index),
     m_browser(nullptr),
     m_closed(false)
 {}
 
 CefRefPtr<CefBrowser> QcefHandler::GetBrowser()
 {
-	return m_browser;
+    return m_browser;
 }
 
 CefRefPtr<CefLifeSpanHandler> QcefHandler::GetLifeSpanHandler()

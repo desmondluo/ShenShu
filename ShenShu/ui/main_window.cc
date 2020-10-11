@@ -10,11 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_close_timer(nullptr),
     m_loop_timer(nullptr)
  {
-	//TODO: 用定时器启动CEF的UI消息循环, 当CEF被拆到其他线程的时候, 这个就要被删除
-	if(startTimer(100) == 0) 
-	{
-		throw std::runtime_error("Unable to start CEF timer");
-	}
+    //TODO: 用定时器启动CEF的UI消息循环, 当CEF被拆到其他线程的时候, 这个就要被删除
+    if(startTimer(100) == 0) 
+    {
+        throw std::runtime_error("Unable to start CEF timer");
+    }
     m_loop_timer = new QTimer();
     connect(m_loop_timer, SIGNAL(timeout()), this, SLOT(timerEvent()));
     m_loop_timer->start(10);
@@ -68,12 +68,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::timerEvent() 
 {
-	// 启动消息循环
+    // 启动消息循环
     if (m_loop_timer->isActive())
     {
         SHApp::Instance().Run();
     }
-	
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)

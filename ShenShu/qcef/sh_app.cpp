@@ -27,7 +27,7 @@ SHApp::SHApp()
 SHApp::~SHApp()
 {
     CefQuitMessageLoop();
-	CefShutdown();
+    CefShutdown();
 }
 
 void SHApp::Release()
@@ -38,11 +38,11 @@ void SHApp::Release()
 
 SHApp& SHApp::Instance()
 {
-	if (SHApp::m_app == nullptr)
-	{
+    if (SHApp::m_app == nullptr)
+    {
         SHApp::m_app = new SHApp();
-	}
-	return *m_app;
+    }
+    return *m_app;
 }
 
 

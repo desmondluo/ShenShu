@@ -19,15 +19,15 @@
 class MainWindow: public QMainWindow {
   Q_OBJECT
 public:
-	/**
-	 * @brief 构造函数
-	 * @param 父节点
-	 */
-	MainWindow(QWidget *parent = 0);
-	/**
-	 * @brief 析构函数
-	 */
-	~MainWindow();
+    /**
+     * @brief 构造函数
+     * @param 父节点
+     */
+    MainWindow(QWidget *parent = 0);
+    /**
+     * @brief 析构函数
+     */
+    ~MainWindow();
 
 protected:
     /**
@@ -53,10 +53,10 @@ private:
     //! CEF的消息循环定时器
     QTimer* m_loop_timer;
 private slots:
-	/**
-	 * @brief 当url被输入时候的回调
-	 */
-	void UrlEntered();
+    /**
+     * @brief 当url被输入时候的回调
+     */
+    void UrlEntered();
     /**
      * @brief 检查关闭时候的回调
      */

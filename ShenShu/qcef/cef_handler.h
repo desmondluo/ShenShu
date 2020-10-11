@@ -11,12 +11,12 @@ class QcefHandler :
     public CefClient,
     public CefLifeSpanHandler {
  public:
-	 explicit QcefHandler(int32_t index);
-	 /**
-	  * @brief 获取这个handler对应的browser
-	  * @return 对应的browser
-	  */
-	 CefRefPtr<CefBrowser> GetBrowser();
+     explicit QcefHandler(int32_t index);
+     /**
+      * @brief 获取这个handler对应的browser
+      * @return 对应的browser
+      */
+     CefRefPtr<CefBrowser> GetBrowser();
      /**
       * @brief 获取浏览器的生命周期控制器
       * @param browser 浏览器的生命周期handler
@@ -44,10 +44,10 @@ class QcefHandler :
       */
      bool IsClosed();
 private:
-	//! 索引
-	int32_t m_index;
-	//! CEF的事例
-	CefRefPtr<CefBrowser> m_browser;
+    //! 索引
+    int32_t m_index;
+    //! CEF的事例
+    CefRefPtr<CefBrowser> m_browser;
     //! 是否已经关闭
     bool m_closed;
 

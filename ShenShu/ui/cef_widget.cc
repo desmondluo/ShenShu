@@ -3,10 +3,9 @@
 
 CefWidget::CefWidget(QWidget *parent): QWidget(parent) 
 {
-	// 初始化一个浏览器
+    // 初始化一个浏览器
     m_ptr_app = new QCefApp(0);
     m_ptr_app->CreateBrowser((CefWindowHandle)winId(), "http://baidu.com");
-	//m_handler = QcefApp::Instance()->CreateBrowser((CefWindowHandle)winId());
 }
 
 CefWidget::~CefWidget() 

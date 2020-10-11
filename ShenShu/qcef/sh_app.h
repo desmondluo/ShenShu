@@ -21,26 +21,26 @@
 class SHApp
 {
 public:
-	/**
-	 * @brief 构造函数
-	 */
+    /**
+     * @brief 构造函数
+     */
     SHApp();
-	/**
-	 * @brief 析构函数
-	 */
-	virtual ~SHApp();
+    /**
+     * @brief 析构函数
+     */
+    virtual ~SHApp();
     /**
      * @brief 释放自身
      */
     void Release();
-	/**
-	 * @brirf 全局单例, 任何地方可以获取这个app, 所以这个里面要保证自己的绝对线程安全
-	 */
-	static SHApp& Instance();
-	/**
-	 * @brief 开始CEF的消息循环
-	 */
-	virtual void Run();
+    /**
+     * @brirf 全局单例, 任何地方可以获取这个app, 所以这个里面要保证自己的绝对线程安全
+     */
+    static SHApp& Instance();
+    /**
+     * @brief 开始CEF的消息循环
+     */
+    virtual void Run();
     /**
      * @brief 退出码
      */
