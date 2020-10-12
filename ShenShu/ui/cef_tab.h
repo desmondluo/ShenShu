@@ -15,6 +15,8 @@
 #include "cef_widget.h"
 #include "../util/file_download.h"
 
+
+
 class CefTab:
     public QFrame
 {
@@ -38,11 +40,7 @@ public:
      * @return 是否已经关闭
      */
     bool Closed();
-    /**
-     * @brief 改变ico
-     */
-    void ChangeIcon(QString fileurl);
-private slots:
+public slots:
     /**
      * @brief 当按下回车键的时候
      */
@@ -51,7 +49,10 @@ private slots:
      * @brief 当icon下载完成
      */
     void IconDownloadFinisned();
-
+    /**
+ * @brief 改变ico
+ */
+    void ChangeIcon(QString fileurl);
 private:
     //! 父节点的tab
     QTabWidget* m_parent;

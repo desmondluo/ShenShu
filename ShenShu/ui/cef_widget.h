@@ -11,6 +11,8 @@
 #include <include/cef_app.h>
 
 class QCefApp;
+class QcefHandler;
+class CefTab;
 
 #include <QtWidgets>
 /**
@@ -23,7 +25,7 @@ class CefWidget: public QWidget {
      * @brief 构造函数
     * @param 父节点
      */
-    CefWidget(QWidget *parent = 0);
+    CefWidget(CefTab *parent = 0);
     /**
      * @brief 析构函数
      */
@@ -45,6 +47,10 @@ class CefWidget: public QWidget {
      * @brief CEF是否已经关闭
      */
     bool CefClosed();
+    /**
+     * @brief 获取cef的handler
+     */
+    CefRefPtr<QcefHandler> GetHandler();
 
  protected:
     /**

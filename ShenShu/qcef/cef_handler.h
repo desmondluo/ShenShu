@@ -7,14 +7,17 @@
 #include <QtWidgets>
 #include "include/cef_client.h"
 #include "../ui/cef_tab.h"
+#include <QMetaType>
 
 class QcefHandler :
+    public QObject,
     public CefClient,
     public CefLifeSpanHandler,
     public CefDisplayHandler
 {
+    Q_OBJECT
  public:
-     explicit QcefHandler(CefTab* tab);
+     explicit QcefHandler();
      /**
       * @brief 获取这个handler对应的browser
       * @return 对应的browser
@@ -72,6 +75,11 @@ class QcefHandler :
       * @return 是否已经关闭
       */
      bool IsClosed();
+     signals:
+    /**
+     * @brief 发送icon改变的信号
+     */
+     void IconUrlChange(QString str);
 private:
     //! 索引
     int32_t m_index;
@@ -79,8 +87,6 @@ private:
     CefRefPtr<CefBrowser> m_browser;
     //! 是否已经关闭
     bool m_closed;
-    //! cef的tab
-    CefTab* m_cef_tab;
 
   IMPLEMENT_REFCOUNTING(QcefHandler);
 };

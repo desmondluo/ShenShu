@@ -1,8 +1,8 @@
 ﻿#include "qcef_app.h"
 
-QCefApp::QCefApp(CefTab* tab)
+QCefApp::QCefApp()
 {
-    m_ptr_handler = new QcefHandler(tab);
+    m_ptr_handler = new QcefHandler();
 }
 
 QCefApp::~QCefApp()
@@ -36,6 +36,11 @@ CefRefPtr<CefBrowser> QCefApp::GetBrowser()
         return m_ptr_handler->GetBrowser();
     else
         return nullptr;
+}
+
+CefRefPtr<QcefHandler> QCefApp::GetHandler()
+{
+    return m_ptr_handler;
 }
 
 bool QCefApp::IsClose()

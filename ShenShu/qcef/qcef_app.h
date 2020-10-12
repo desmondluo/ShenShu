@@ -29,7 +29,7 @@ public:
      * @brief 构造函数
      * @param index 索引
      */
-    QCefApp(CefTab* tab);
+    QCefApp();
     /**
      * @brief 析构函数
      */
@@ -53,6 +53,10 @@ public:
      * @return 获取到的浏览器
      */
     CefRefPtr<CefBrowser> GetBrowser();
+    /**
+     * @brief 获取CEF的handler
+     */
+    CefRefPtr<QcefHandler> GetHandler();
     /**
      * @brief 是否已经关闭
      * @return 是否已经关闭

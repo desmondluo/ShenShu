@@ -1,10 +1,10 @@
 ﻿#include "cef_widget.h"
 #include "../qcef/qcef_app.h"
 
-CefWidget::CefWidget(QWidget *parent): QWidget(parent) 
+CefWidget::CefWidget(CefTab *parent): QWidget(parent) 
 {
     // 初始化一个浏览器
-    m_ptr_app = new QCefApp(0);
+    m_ptr_app = new QCefApp();
     m_ptr_app->CreateBrowser((CefWindowHandle)winId(), "http://baidu.com");
 }
 
@@ -58,4 +58,9 @@ bool CefWidget::CefClosed()
         return true;
     }
     return false;
+}
+
+CefRefPtr<QcefHandler> CefWidget::GetHandler()
+{
+    return m_ptr_app->GetHandler();
 }

@@ -124,7 +124,7 @@
   <ItemGroup>
     <QtMoc Include="ui\cef_tab.h" />
     <QtMoc Include="util\file_download.h" />
-    <ClInclude Include="qcef\cef_handler.h" />
+    <QtMoc Include="qcef\cef_handler.h" />
     <ClInclude Include="qcef\sh_app.h" />
     <ClInclude Include="qcef\qcef_app.h" />
   </ItemGroup>

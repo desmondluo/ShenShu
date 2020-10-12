@@ -2,10 +2,9 @@
 
 #include "include/wrapper/cef_helpers.h"
 
-QcefHandler::QcefHandler(CefTab* tab):
+QcefHandler::QcefHandler():
     m_browser(nullptr),
-    m_closed(false),
-    m_cef_tab(tab)
+    m_closed(false)
 {}
 
 CefRefPtr<CefBrowser> QcefHandler::GetBrowser()
@@ -69,7 +68,7 @@ void QcefHandler::OnFaviconURLChange(CefRefPtr<CefBrowser> browser, const std::v
 
     if (icon_urls.size() > 0)
     {
-        //m_cef_tab->ChangeIcon(QString::fromStdString(icon_urls[0].ToString()));
+        emit IconUrlChange(QString::fromStdString(icon_urls[0].ToString()));
     }
 }
 
