@@ -18,7 +18,8 @@ CefTab::CefTab(QTabWidget* parent):
     layout->setRowStretch(0, 0);
     layout->setRowStretch(1, 1);
     setLayout(layout);
-    bool success = connect(m_cef_widget->GetHandler().get(), SIGNAL(QcefHandler::IconUrlChange(QString)), this, SLOT(CefTab::ChangeIcon(QString)), Qt::DirectConnection);
+    
+    bool success = connect(m_cef_widget->GetHandler().get(), SIGNAL(IconUrlChange(QString)), this, SLOT(ChangeIcon(QString)), Qt::DirectConnection);
     connect(&m_icon_download, SIGNAL(Finished()), this, SLOT(IconDownloadFinisned()));
    // ChangeIcon(QString("https://www.baidu.com/favicon.ico"));
 }
