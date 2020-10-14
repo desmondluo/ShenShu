@@ -10,8 +10,8 @@
 #define QT_CEF_POC_CEFWIDGET_H_
 #include <include/cef_app.h>
 
-class QCefApp;
-class QcefHandler;
+#include "../qcef/cef_handler.h"
+
 class CefTab;
 
 #include <QtWidgets>
@@ -25,7 +25,7 @@ class CefWidget: public QWidget {
      * @brief 构造函数
     * @param 父节点
      */
-    CefWidget(CefTab *parent = 0);
+    CefWidget(QWidget *parent = 0);
     /**
      * @brief 析构函数
      */
@@ -48,10 +48,10 @@ class CefWidget: public QWidget {
      */
     bool CefClosed();
     /**
-     * @brief 获取cef的handler
+     * @brief 获取这个CEF对应的handler
+     * return 这个cef对应的handler
      */
     CefRefPtr<QcefHandler> GetHandler();
-
  protected:
     /**
      * @brief 当移动的时候
@@ -65,7 +65,7 @@ class CefWidget: public QWidget {
     void resizeEvent(QResizeEvent *event);
 private:
     //! 内部托管的cef浏览器
-    CefRefPtr<QCefApp> m_ptr_app;
+    CefRefPtr<QcefHandler> m_ptr_handler;
 };
 
 #endif // QT_CEF_POC_CEFWIDGET_H_

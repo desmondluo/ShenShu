@@ -1,5 +1,4 @@
 ﻿#include "main_window.h"
-#include "../qcef/qcef_app.h"
 #include "../qcef/sh_app.h"
 #include "cef_tab.h"
 #include <QTabWidget>
@@ -34,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     QString path = QDir::currentPath() + "/resource/images/ShenShu256.ico";
     QIcon icon(path);
     setWindowIcon(icon);
-    m_tab_widget->setTabIcon(0, icon);
     // 设置qss
     setCentralWidget(m_tab_widget);
 }

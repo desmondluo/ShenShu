@@ -21,7 +21,6 @@ CefTab::CefTab(QTabWidget* parent):
     
     bool success = connect(m_cef_widget->GetHandler().get(), SIGNAL(IconUrlChange(QString)), this, SLOT(ChangeIcon(QString)), Qt::DirectConnection);
     connect(&m_icon_download, SIGNAL(Finished()), this, SLOT(IconDownloadFinisned()));
-   // ChangeIcon(QString("https://www.baidu.com/favicon.ico"));
 }
 
 CefTab::~CefTab()

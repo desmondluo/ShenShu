@@ -113,7 +113,6 @@
     <ClCompile Include="ui\main_window.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qcef\sh_app.cpp" />
-    <ClCompile Include="qcef\qcef_app.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ui\main_window.h" />
@@ -126,7 +125,6 @@
     <QtMoc Include="util\file_download.h" />
     <QtMoc Include="qcef\cef_handler.h" />
     <ClInclude Include="qcef\sh_app.h" />
-    <ClInclude Include="qcef\qcef_app.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

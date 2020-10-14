@@ -55,3 +55,14 @@ int32_t SHApp::ExitCode()
 {
     return m_exit;
 }
+
+void SHApp::CreateBrowser(CefWindowHandle winhandler, CefRefPtr<QcefHandler> cefhandler, std::string url)
+{
+    CefWindowInfo wininfo;
+    CefBrowserSettings settings;
+    //settings.multi_threaded_message_loop = true;
+    // 第一次并不知道在哪的, 但是这个不重要, 后面一旦外部的UI初始化完毕, 就会主动通知这个UI, 做对应的调整
+    wininfo.SetAsChild(winhandler, RECT{ 0, 0, 0, 0 });
+    CefBrowserHost::CreateBrowserSync(wininfo, cefhandler, CefString("http://baidu.com"), settings, nullptr, nullptr);
+}
+

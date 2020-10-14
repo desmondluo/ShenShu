@@ -45,6 +45,13 @@ public:
      * @brief 退出码
      */
     int32_t ExitCode();
+    /**
+     * @brief 创建浏览器
+     * @param winhandler cef托管的handler
+     * @param url 第一次初始化完毕的url
+     */
+    void CreateBrowser(CefWindowHandle winhandler, CefRefPtr<QcefHandler> cefhandler, std::string url);
+
 private:
 	//! 自身
     static SHApp* m_app;

@@ -6,7 +6,6 @@
 
 #include <QtWidgets>
 #include "include/cef_client.h"
-#include "../ui/cef_tab.h"
 #include <QMetaType>
 
 class QcefHandler :
