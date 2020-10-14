@@ -4,4 +4,6 @@ x64
 .vs
 lib
 include
+Debug
+Release
 GPUCACHE
