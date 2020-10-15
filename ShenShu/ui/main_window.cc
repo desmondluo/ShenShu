@@ -25,11 +25,19 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1024, 768);
 
     m_tab_widget = new QTabWidget;
+    m_tab_widget->setTabsClosable(true);
+    // 设置关闭
+    connect(m_tab_widget, &QTabWidget::tabCloseRequested, this, &MainWindow::CloseTab);
     CefTab* firsttab = new CefTab(m_tab_widget);
     m_tab_widget->addTab(firsttab, QString::fromLocal8Bit("测试1"));
 
     CefTab* secondtab = new CefTab(m_tab_widget);
     m_tab_widget->addTab(secondtab, QString::fromLocal8Bit("测试2"));
+
+    CefTab* thirdtab = new CefTab(m_tab_widget);
+    m_tab_widget->addTab(thirdtab, QString::fromLocal8Bit("测试3"));
+
+
     QString path = QDir::currentPath() + "/resource/images/ShenShu256.ico";
     QIcon icon(path);
     setWindowIcon(icon);
@@ -61,6 +69,23 @@ void MainWindow::timerEvent()
     }
 }
 
+void MainWindow::CloseTab(int32_t index)
+{
+    if (index == -1)
+    {
+        return;
+    }
+    CefTab* tab = static_cast<CefTab*>(m_tab_widget->widget(index));
+    if (!tab)
+    {
+        return;
+    }
+    tab->DoClose();
+    m_tab_widget->removeTab(index);
+    delete tab;
+    tab = nullptr;
+}
+
 void MainWindow::closeEvent(QCloseEvent* event)
 {
     if (m_close_times == 0)
@@ -72,6 +97,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
     else
     {
         event->accept();
+        // 强制退出
+        PostQuitMessage(0);
     }
 }
 

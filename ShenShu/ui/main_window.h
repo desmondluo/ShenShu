@@ -61,6 +61,11 @@ private slots:
      * @param 定时器事件
      */
     void timerEvent();
+    /**
+     * @brief 关闭一个tab
+     * @param index 关闭的索引
+     */
+    void CloseTab(int32_t index);
 };
 
 #endif // QT_CEF_POC_MAINWINDOW_H_

@@ -19,7 +19,7 @@ CefTab::CefTab(QTabWidget* parent):
     layout->setRowStretch(1, 1);
     setLayout(layout);
     
-    bool success = connect(m_cef_widget->GetHandler().get(), SIGNAL(IconUrlChange(QString)), this, SLOT(ChangeIcon(QString)), Qt::DirectConnection);
+    bool success = connect(m_cef_widget->GetHandler().get(), &QcefHandler::IconUrlChange, this, &CefTab::ChangeIcon);
     connect(&m_icon_download, SIGNAL(Finished()), this, SLOT(IconDownloadFinisned()));
 }
 
