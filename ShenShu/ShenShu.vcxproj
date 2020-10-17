@@ -90,6 +90,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(Qt_LIBS_);libcef.lib;libcef_dll_wrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -106,6 +107,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ui\cef_url_line_edit.cpp" />
     <ClCompile Include="util\file_download.cpp" />
     <ClCompile Include="ui\cef_tab.cpp" />
     <ClCompile Include="qcef\cef_handler.cc" />
@@ -124,6 +126,7 @@
     <QtMoc Include="ui\cef_tab.h" />
     <QtMoc Include="util\file_download.h" />
     <QtMoc Include="qcef\cef_handler.h" />
+    <QtMoc Include="ui\cef_url_line_edit.h" />
     <ClInclude Include="qcef\sh_app.h" />
   </ItemGroup>
   <ItemGroup>

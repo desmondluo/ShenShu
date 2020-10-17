@@ -7,7 +7,7 @@ CefTab::CefTab(QTabWidget* parent):
 {
     // 初始化CEF的组件
     m_cef_widget = new CefWidget(this);
-    m_url_line = new QLineEdit;
+    m_url_line = new CefUrlLineEdit;
     // 连接信号
     connect(m_url_line, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
     auto layout = new QGridLayout;

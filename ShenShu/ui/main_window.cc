@@ -31,11 +31,11 @@ MainWindow::MainWindow(QWidget *parent)
     CefTab* firsttab = new CefTab(m_tab_widget);
     m_tab_widget->addTab(firsttab, QString::fromLocal8Bit("测试1"));
 
-    CefTab* secondtab = new CefTab(m_tab_widget);
-    m_tab_widget->addTab(secondtab, QString::fromLocal8Bit("测试2"));
+    //CefTab* secondtab = new CefTab(m_tab_widget);
+    //m_tab_widget->addTab(secondtab, QString::fromLocal8Bit("测试2"));
 
-    CefTab* thirdtab = new CefTab(m_tab_widget);
-    m_tab_widget->addTab(thirdtab, QString::fromLocal8Bit("测试3"));
+    //CefTab* thirdtab = new CefTab(m_tab_widget);
+    //m_tab_widget->addTab(thirdtab, QString::fromLocal8Bit("测试3"));
 
 
     QString path = QDir::currentPath() + "/resource/images/ShenShu256.ico";

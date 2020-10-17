@@ -13,6 +13,7 @@
 
 #include <QtWidgets/QtWidgets>
 #include "cef_widget.h"
+#include "cef_url_line_edit.h"
 #include "../util/file_download.h"
 
 
@@ -59,8 +60,9 @@ private:
     //! 内部的cef结点
     CefWidget* m_cef_widget;
     //! 内不能的地址栏
-    QLineEdit* m_url_line;
+    CefUrlLineEdit* m_url_line;
 private:
+    //! icon下载器
     FileDownload m_icon_download;
 };
 

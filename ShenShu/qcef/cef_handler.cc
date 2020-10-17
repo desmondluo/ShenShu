@@ -22,6 +22,11 @@ CefRefPtr<CefDisplayHandler> QcefHandler::GetDisplayHandler()
     return this;
 }
 
+CefRefPtr<CefFocusHandler> QcefHandler::GetFocusHandler()
+{
+    return this;
+}
+
 void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
     m_browser = browser;

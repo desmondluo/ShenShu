@@ -12,7 +12,8 @@ class QcefHandler :
     public QObject,
     public CefClient,
     public CefLifeSpanHandler,
-    public CefDisplayHandler
+    public CefDisplayHandler,
+    public CefFocusHandler
 {
     Q_OBJECT
  public:
@@ -32,6 +33,10 @@ class QcefHandler :
       * @return 外观handler
       */
      virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE;
+     /**
+      * brief 获取焦点的handler
+      */
+     virtual CefRefPtr<CefFocusHandler> GetFocusHandler() OVERRIDE;
      /**
       * @brief 当浏览器被创建时候的回调
       * @param browser 浏览器

@@ -18,7 +18,7 @@ void CefWidget::LoadUrl(const QString &url)
 {
     if (m_ptr_handler && m_ptr_handler->GetBrowser())
     {
-        m_ptr_handler->GetBrowser()->GetMainFrame()->LoadURL(CefString(url.toStdString()));
+        m_ptr_handler->GetBrowser()->GetMainFrame()->LoadURL(CefString(url.toUtf8().constData()));
     }
 }
 
