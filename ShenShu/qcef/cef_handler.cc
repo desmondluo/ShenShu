@@ -27,6 +27,11 @@ CefRefPtr<CefFocusHandler> QcefHandler::GetFocusHandler()
     return this;
 }
 
+CefRefPtr<CefContextMenuHandler> QcefHandler::GetContextMenuHandler()
+{
+    return this;
+}
+
 void QcefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
     m_browser = browser;
@@ -96,6 +101,45 @@ void QcefHandler::OnGotFocus(CefRefPtr<CefBrowser> browser)
 
     // 发送要line失去焦点
     emit lineRemoveFocus();
+}
+
+void QcefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
+{
+    // 不管怎么样, 先清空以前的东西
+    model->Remove(MENU_ID_PRINT);
+    model->Remove(MENU_ID_VIEW_SOURCE);
+
+    if ((params->GetTypeFlags() & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0) {
+        // Add a separator if the menu already has items.
+        if (model->GetCount() > 0)
+        {
+            model->RemoveAt(2);
+            model->Remove(MENU_ID_BACK);
+            model->Remove(MENU_ID_FORWARD);
+            //model->Clear();
+            //model->AddSeparator();
+            model->AddItem(MENU_ID_USER_SHOWDEVTOOLS, L"开发者工具"); //"&Show DevTools");
+        }
+    }
+}
+
+bool QcefHandler::RunContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model,
+    CefRefPtr<CefRunContextMenuCallback> callback)
+{
+    return false;
+}
+
+bool QcefHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame,
+                                       CefRefPtr<CefContextMenuParams> params, int command_id, EventFlags event_flags)
+{
+    return true;
+}
+
+void QcefHandler::OnContextMenuDismissed(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame)
+{
+    int32_t a = 0;
 }
 
 bool QcefHandler::IsClosed()

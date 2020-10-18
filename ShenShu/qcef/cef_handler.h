@@ -8,12 +8,19 @@
 #include "include/cef_client.h"
 #include <QMetaType>
 
+enum RightMenu
+{
+    MENU_ID_USER_OPENLINK = MENU_ID_USER_FIRST + 200,
+    MENU_ID_USER_SHOWDEVTOOLS,
+};
+
 class QcefHandler :
     public QObject,
     public CefClient,
     public CefLifeSpanHandler,
     public CefDisplayHandler,
-    public CefFocusHandler
+    public CefFocusHandler,
+    public CefContextMenuHandler
 {
     Q_OBJECT
  public:
@@ -37,6 +44,10 @@ class QcefHandler :
       * brief 获取焦点的handler
       */
      virtual CefRefPtr<CefFocusHandler> GetFocusHandler() OVERRIDE;
+    /**
+     * @brief 获取右击菜单栏的handler
+     */
+     virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler() OVERRIDE;
      /**
       * @brief 当浏览器被创建时候的回调
       * @param browser 浏览器
@@ -87,6 +98,31 @@ class QcefHandler :
      * @brief 当已经得到焦点
      */
      virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) OVERRIDE;
+     /**
+      * @brief 当右击的时候, 将要弹出菜单
+      */
+     virtual void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
+         CefRefPtr<CefFrame> frame,
+         CefRefPtr<CefContextMenuParams> params,
+         CefRefPtr<CefMenuModel> model) OVERRIDE;
+     /**
+      * @brief 当运行这个菜单的时候
+      */
+     virtual bool RunContextMenu(CefRefPtr<CefBrowser> browser,
+         CefRefPtr<CefFrame> frame,
+         CefRefPtr<CefContextMenuParams> params,
+         CefRefPtr<CefMenuModel> model,
+         CefRefPtr<CefRunContextMenuCallback> callback) OVERRIDE;
+     /**
+      * @brief 当菜单栏被点击的时候
+      */
+     virtual bool OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
+         CefRefPtr<CefFrame> frame,
+         CefRefPtr<CefContextMenuParams> params,
+         int command_id,
+         EventFlags event_flags) OVERRIDE;
+     virtual void OnContextMenuDismissed(CefRefPtr<CefBrowser> browser,
+         CefRefPtr<CefFrame> frame) OVERRIDE;
 
      /**
       * @brief 是否已经关闭
