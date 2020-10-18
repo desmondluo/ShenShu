@@ -39,6 +39,10 @@ protected:
      * @brief 准备关闭
      */
     void preClose();
+    /**
+     * @brief 添加一个新的tab
+     */
+    void addTab();
 private:
     QTabWidget* m_tab_widget;
     //! 关闭次数
@@ -48,10 +52,6 @@ private:
     //! CEF的消息循环定时器
     QTimer* m_loop_timer;
 private slots:
-    /**
-     * @brief 当url被输入时候的回调
-     */
-    void UrlEntered();
     /**
      * @brief 检查关闭时候的回调
      */
