@@ -42,5 +42,11 @@ protected:
      * @param 焦点事件
      */
     virtual void focusOutEvent(QFocusEvent* event) override;
+public slots:
+    /**
+     * @brief 失去焦点
+     */
+    void sloseFocus();
+
 };
 #endif

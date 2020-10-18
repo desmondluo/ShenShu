@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_loop_timer(nullptr)
  {
     //TODO: 用定时器启动CEF的UI消息循环, 当CEF被拆到其他线程的时候, 这个就要被删除
-    if(startTimer(10) == 0) 
+    if(startTimer(1) == 0) 
     {
         throw std::runtime_error("Unable to start CEF timer");
     }

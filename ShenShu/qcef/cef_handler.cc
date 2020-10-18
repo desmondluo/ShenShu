@@ -77,6 +77,21 @@ void QcefHandler::OnFaviconURLChange(CefRefPtr<CefBrowser> browser, const std::v
     }
 }
 
+bool QcefHandler::OnSetFocus(CefRefPtr<CefBrowser> browser, FocusSource source)
+{
+    qDebug() << QString::fromLocal8Bit("cef获取焦点");
+    return false;
+}
+
+void QcefHandler::OnGotFocus(CefRefPtr<CefBrowser> browser)
+{
+    CEF_REQUIRE_UI_THREAD();
+
+    qDebug() << QString::fromLocal8Bit("cef已经获取焦点");
+    // 发送要line失去焦点
+    emit lineRemoveFocus();
+}
+
 bool QcefHandler::IsClosed()
 {
     return m_closed;

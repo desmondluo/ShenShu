@@ -73,6 +73,8 @@ class QcefHandler :
       */
      virtual void OnFaviconURLChange(CefRefPtr<CefBrowser> browser,
          const std::vector<CefString>& icon_urls) OVERRIDE;
+     virtual bool OnSetFocus(CefRefPtr<CefBrowser> browser, FocusSource source) OVERRIDE;
+     virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) OVERRIDE;
 
      /**
       * @brief 是否已经关闭
@@ -84,6 +86,10 @@ class QcefHandler :
      * @brief 发送icon改变的信号
      */
      void IconUrlChange(QString str);
+    /**
+     * @brief 编辑框要失去焦点
+     */
+     void lineRemoveFocus();
 private:
     //! 索引
     int32_t m_index;

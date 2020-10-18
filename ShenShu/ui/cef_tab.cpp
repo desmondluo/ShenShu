@@ -6,7 +6,7 @@ CefTab::CefTab(QTabWidget* parent):
     m_icon_download(parent)
 {
     // 初始化CEF的组件
-    m_cef_widget = new CefWidget(this);
+    m_cef_widget = new CefWidget();
     m_url_line = new CefUrlLineEdit;
     // 连接信号
     connect(m_url_line, SIGNAL(returnPressed()), this, SLOT(UrlEntered()));
@@ -20,7 +20,9 @@ CefTab::CefTab(QTabWidget* parent):
     setLayout(layout);
     
     bool success = connect(m_cef_widget->GetHandler().get(), &QcefHandler::IconUrlChange, this, &CefTab::ChangeIcon);
+    connect(m_cef_widget->GetHandler().get(), &QcefHandler::lineRemoveFocus, m_url_line, &CefUrlLineEdit::sloseFocus);
     connect(&m_icon_download, SIGNAL(Finished()), this, SLOT(IconDownloadFinisned()));
+   
 }
 
 CefTab::~CefTab()
