@@ -37,8 +37,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_tab_widget->setTabEnabled(0, false);
     m_tab_widget->tabBar()->setTabButton(0, QTabBar::RightSide, tb);
     // 添加几个测试的tab
-    //CefTab* firsttab = new CefTab(m_tab_widget);
-    //m_tab_widget->addTab(firsttab, QString::fromLocal8Bit("测试1"));
+    CefTab* firsttab = new CefTab(m_tab_widget);
+    m_tab_widget->addTab(firsttab, QString::fromLocal8Bit("测试1"));
+    firsttab->ChangeUrl("http://baidu.com");
+    m_tab_widget->setCurrentWidget(firsttab);
+
 
     //CefTab* secondtab = new CefTab(m_tab_widget);
     //m_tab_widget->addTab(secondtab, QString::fromLocal8Bit("测试2"));
@@ -133,7 +136,7 @@ void MainWindow::preClose()
 void MainWindow::addTab()
 {
     CefTab* tab = new CefTab(m_tab_widget);
-    m_tab_widget->addTab(tab, QString::fromLocal8Bit("测试1"));
+    m_tab_widget->addTab(tab, QString::fromLocal8Bit("新建标签页"));
     m_tab_widget->setCurrentIndex(m_tab_widget->count() - 1);
 }
 

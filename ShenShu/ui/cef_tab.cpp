@@ -22,7 +22,7 @@ CefTab::CefTab(QTabWidget* parent):
     bool success = connect(m_cef_widget->GetHandler().get(), &QcefHandler::IconUrlChange, this, &CefTab::ChangeIcon);
     connect(m_cef_widget->GetHandler().get(), &QcefHandler::lineRemoveFocus, m_url_line, &CefUrlLineEdit::sloseFocus);
     connect(&m_icon_download, SIGNAL(Finished()), this, SLOT(IconDownloadFinisned()));
-   
+    connect(m_cef_widget->GetHandler().get(), &QcefHandler::TitleChange, this, &CefTab::ChangeTitle);
 }
 
 CefTab::~CefTab()
@@ -39,9 +39,20 @@ bool CefTab::Closed()
     return m_cef_widget->CefClosed();
 }
 
+void CefTab::ChangeUrl(QString url)
+{
+    m_cef_widget->LoadUrl(url);
+}
+
 void CefTab::ChangeIcon(QString fileurl)
 {
     m_icon_download.StartDownload(fileurl);
+}
+
+void CefTab::ChangeTitle(QString title)
+{
+    int32_t index = m_parent->indexOf(this);
+    m_parent->setTabText(index, title);
 }
 
 void CefTab::IconDownloadFinisned()

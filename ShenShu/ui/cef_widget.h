@@ -27,6 +27,12 @@ class CefWidget: public QWidget {
      */
     CefWidget(QWidget *parent = 0);
     /**
+     * @brief 构造函数
+     * @param parent 父节点
+     * @param url 初始化地址
+     */
+    CefWidget(QWidget* parent, QString url);
+    /**
      * @brief 析构函数
      */
     ~CefWidget();

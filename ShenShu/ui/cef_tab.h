@@ -41,6 +41,11 @@ public:
      * @return 是否已经关闭
      */
     bool Closed();
+    /**
+     * @brief 外部改变地址
+     * @param url 需要改变的地址
+     */
+    void ChangeUrl(QString url);
 public slots:
     /**
      * @brief 当按下回车键的时候
@@ -54,6 +59,11 @@ public slots:
  * @brief 改变ico
  */
     void ChangeIcon(QString fileurl);
+    /**
+     * @brief 改变title
+     * @param title 标题
+     */
+    void ChangeTitle(QString title);
 private:
     //! 父节点的tab
     QTabWidget* m_parent;

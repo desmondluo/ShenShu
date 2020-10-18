@@ -73,7 +73,19 @@ class QcefHandler :
       */
      virtual void OnFaviconURLChange(CefRefPtr<CefBrowser> browser,
          const std::vector<CefString>& icon_urls) OVERRIDE;
+     /**
+      * @brief 当title发生变化
+      */
+     virtual void OnTitleChange(CefRefPtr<CefBrowser> browser,
+         const CefString& title) OVERRIDE;
+
+    /**
+     * @brief 当将要设置焦点(如果后面不想一打开就设置焦点， 这个地方可以设置为false)
+     */
      virtual bool OnSetFocus(CefRefPtr<CefBrowser> browser, FocusSource source) OVERRIDE;
+    /**
+     * @brief 当已经得到焦点
+     */
      virtual void OnGotFocus(CefRefPtr<CefBrowser> browser) OVERRIDE;
 
      /**
@@ -90,6 +102,11 @@ class QcefHandler :
      * @brief 编辑框要失去焦点
      */
      void lineRemoveFocus();
+    /**
+     * @brief 当标题发生改变
+     * @param title 标题
+     */
+     void TitleChange(QString ttitle);
 private:
     //! 索引
     int32_t m_index;

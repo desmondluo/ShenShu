@@ -6,7 +6,15 @@ CefWidget::CefWidget(QWidget *parent): QWidget(parent)
 {
     // 初始化一个浏览器
     m_ptr_handler = new QcefHandler();
-    SHApp::Instance().CreateBrowser((CefWindowHandle)winId(),m_ptr_handler, "http://baidu.com");
+    SHApp::Instance().CreateBrowser((CefWindowHandle)winId(),m_ptr_handler, "_blank");
+}
+
+CefWidget::CefWidget(QWidget* parent, QString url)
+{
+    // 初始化一个浏览器
+    m_ptr_handler = new QcefHandler();
+    SHApp::Instance().CreateBrowser((CefWindowHandle)winId(), m_ptr_handler, url.toStdString());
+
 }
 
 CefWidget::~CefWidget() 
